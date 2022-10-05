@@ -12,13 +12,38 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
+
     /**
-     * 登录功能
+     * 根据账号和密码获取用户信息
      * @param user
      * @return
      */
     @Override
-    public User login(User user) {
-        return userMapper.selectUserFromAccountAndPassword(user);
+    public User getUserByAccountAndPassword(User user) {
+        return userMapper.selectUserByAccountAndPassword(user);
+    }
+
+    /**
+     * 判断是否已存在用户
+     * @param user
+     * @return
+     */
+    @Override
+    public boolean hasUser(User user) {
+        User dataUser = userMapper.selectUserByAccount(user);
+        if (dataUser == null) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 新增用户
+     * @param user
+     * @return
+     */
+    @Override
+    public int saveUser(User user) {
+        return userMapper.insertUser(user);
     }
 }
