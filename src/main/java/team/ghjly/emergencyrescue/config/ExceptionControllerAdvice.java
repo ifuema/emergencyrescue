@@ -10,7 +10,7 @@ import team.ghjly.emergencyrescue.vo.ResultVO;
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResultVO<String> MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+    public ResultVO<?> MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         ObjectError objectError = e.getBindingResult().getAllErrors().get(0);
         return new ResultVO<>(ResultCode.FORMAT_FAILED, objectError.getDefaultMessage());
     }
