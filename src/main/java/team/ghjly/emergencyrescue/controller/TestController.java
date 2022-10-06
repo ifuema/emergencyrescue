@@ -20,7 +20,8 @@ public class TestController {
 
 
     @GetMapping("/test")
-    public ResultVO test() {
+    public ResultVO test(HttpServletRequest request) {
+        System.out.println(request.getSession().getAttribute("user"));
         return new ResultVO();
     }
 
