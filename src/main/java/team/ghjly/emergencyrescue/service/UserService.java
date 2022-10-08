@@ -4,18 +4,11 @@ import team.ghjly.emergencyrescue.entity.User;
 
 public interface UserService {
     /**
-     * 根据账号和密码获取用户信息
-     * @param user
+     * 根据账号文本判断是否已存在用户
+     * @param uAccount
      * @return
      */
-    User getUserByAccountAndPassword(User user);
-
-    /**
-     * 判断是否已存在用户
-     * @param user
-     * @return
-     */
-    boolean hasUser(User user);
+    boolean checkUserByUAccountText(Integer uAccount);
 
     /**
      * 新增用户
@@ -23,4 +16,11 @@ public interface UserService {
      * @return
      */
     int saveUser(User user);
+
+    /**
+     * 根据账号文本获取用户隐私信息
+     * @param uAccount
+     * @return
+     */
+    User getUserPrivateByUAccountText(Integer uAccount);
 }

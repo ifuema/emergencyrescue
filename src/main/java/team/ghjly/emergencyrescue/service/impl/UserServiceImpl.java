@@ -13,25 +13,25 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
 
-    /**
-     * 根据账号和密码获取用户信息
-     * @param user
-     * @return
-     */
-    @Override
-    public User getUserByAccountAndPassword(User user) {
-        return userMapper.selectUserByAccountAndPassword(user);
-    }
+//    /**
+//     * 根据账号和密码获取用户信息
+//     * @param user
+//     * @return
+//     */
+//    @Override
+//    public User getUserByAccountAndPassword(User user) {
+//        return userMapper.selectUserByAccountAndPassword(user);
+//    }
 
     /**
-     * 判断是否已存在用户
-     * @param user
+     * 根据账号文本判断是否已存在用户
+     * @param uAccount
      * @return
      */
     @Override
-    public boolean hasUser(User user) {
-        User dataUser = userMapper.selectUserByAccount(user);
-        if (dataUser == null) {
+    public boolean checkUserByUAccountText(Integer uAccount) {
+        Integer uId = userMapper.selectUIdByAccountText(uAccount);
+        if (uId == null) {
             return false;
         }
         return true;
@@ -45,5 +45,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public int saveUser(User user) {
         return userMapper.insertUser(user);
+    }
+
+    /**
+     * 根据账号文本获取用户隐私信息
+     * @param uAccount
+     * @return
+     */
+    @Override
+    public User getUserPrivateByUAccountText(Integer uAccount) {
+        return userMapper.selectUserPrivateByUAccountText(uAccount);
     }
 }

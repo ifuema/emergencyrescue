@@ -7,10 +7,10 @@ import team.ghjly.emergencyrescue.entity.Admin;
 @Mapper
 public interface AdminMapper {
     /**
-     * 根据账号和密码查询管理员信息
-     * @param admin
+     * 根据账号文本查询管理员隐私信息
+     * @param aAccount
      * @return
      */
-    @Select("SELECT a_account FROM admin WHERE a_account = #{aAccount} AND a_password = #{aPassword}")
-    Admin selectAdminByAccountAndPassword(Admin admin);
+    @Select("SELECT * FROM admin WHERE a_account = #{aAccount}")
+    Admin selectAdminPrivateByUAccountText(Integer aAccount);
 }

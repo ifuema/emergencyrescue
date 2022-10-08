@@ -8,16 +8,19 @@ public enum ResultCode {
     /**
      * 未知错误
      */
-    UNKNOWN_FAILED(2001),
+    FAILED(2001),
     /**
-     * 参数格式错误
+     * 参数格式校验失败
      */
     FORMAT_FAILED(2002),
     /**
-     * 参数校验失败
+     * 参数值校验失败
      */
-    VALIDATE_FAILED(2003);
-
+    VALIDATE_FAILED(2003),
+    /**
+     * 无访问权限
+     */
+    PERMISSION_REGECT(3001);
 
     private int code;
 

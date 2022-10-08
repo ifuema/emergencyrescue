@@ -1,5 +1,6 @@
 package team.ghjly.emergencyrescue.controller;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.ghjly.emergencyrescue.entity.Admin;
 import team.ghjly.emergencyrescue.entity.ResultCode;
+import team.ghjly.emergencyrescue.entity.User;
 import team.ghjly.emergencyrescue.entity.groups.Login;
 import team.ghjly.emergencyrescue.service.AdminService;
 import team.ghjly.emergencyrescue.vo.ResultVO;
@@ -29,12 +31,21 @@ public class AdminController {
      */
     @PostMapping("/login")
     public ResultVO<?> login(@RequestBody @Validated({Login.class}) Admin admin, HttpServletRequest request) {
-        Admin dataAdmin = adminService.getAdminByAccountAndPassword(admin);
+        Admin dataAdmin = adminService.getAdminPrivateByAAccountText(admin.getAAccount());
         if (dataAdmin == null) {
-            return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号密码错误！");
+            return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号不存在！");
         } else {
-            request.getSession().setAttribute("admin", dataAdmin);
-            return new ResultVO<>();
+            boolean result = false;
+            try {
+                result = BCrypt.checkpw(admin.getAPassword(), dataAdmin.getAPassword());
+            } catch (IllegalArgumentException e) {
+            }
+            if (result) {
+                request.getSession().setAttribute("admin", dataAdmin);
+                return new ResultVO<>();
+            } else {
+                return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号密码错误！");
+            }
         }
     }
 }

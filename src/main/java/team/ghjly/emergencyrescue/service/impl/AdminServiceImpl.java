@@ -14,12 +14,12 @@ public class AdminServiceImpl implements AdminService {
 
 
     /**
-     * 根据账号和密码获取管理员信息
-     * @param admin
+     * 根据账号文本获取管理员隐私信息
+     * @param aAccount
      * @return
      */
     @Override
-    public Admin getAdminByAccountAndPassword(Admin admin) {
-        return adminMapper.selectAdminByAccountAndPassword(admin);
+    public Admin getAdminPrivateByAAccountText(Integer aAccount) {
+        return adminMapper.selectAdminPrivateByUAccountText(aAccount);
     }
 }

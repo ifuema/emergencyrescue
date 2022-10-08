@@ -1,5 +1,6 @@
 package team.ghjly.emergencyrescue.controller;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import team.ghjly.emergencyrescue.entity.ResultCode;
@@ -27,12 +28,21 @@ public class UserController {
      */
     @PostMapping("/login")
     public ResultVO<?> login(@RequestBody @Validated({Login.class}) User user, HttpServletRequest request) {
-        User dataUser = userService.getUserByAccountAndPassword(user);
+        User dataUser = userService.getUserPrivateByUAccountText(user.getUAccount());
         if (dataUser == null) {
-            return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号密码错误！");
+            return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号不存在！");
         } else {
-            request.getSession().setAttribute("user", dataUser);
-            return new ResultVO<>();
+            boolean result = false;
+            try {
+                result = BCrypt.checkpw(user.getUPassword(), dataUser.getUPassword());
+            } catch (IllegalArgumentException e) {
+            }
+            if (result) {
+                request.getSession().setAttribute("user", dataUser);
+                return new ResultVO<>();
+            } else {
+                return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号密码错误！");
+            }
         }
     }
 
@@ -43,13 +53,14 @@ public class UserController {
      */
     @PostMapping("/regist")
     public ResultVO<?> regist(@RequestBody @Validated({Regist.class}) User user) {
-        if (userService.hasUser(user)) {
+        if (userService.checkUserByUAccountText(user.getUAccount())) {
             return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号已存在！");
         } else {
+            user.setUPassword(BCrypt.hashpw(user.getUPassword(), BCrypt.gensalt()));
             if (userService.saveUser(user) >= 1) {
                 return new ResultVO<>();
             } else {
-                return new ResultVO<>(ResultCode.UNKNOWN_FAILED, "注册失败！");
+                return new ResultVO<>(ResultCode.FAILED, "注册失败！");
             }
         }
     }
