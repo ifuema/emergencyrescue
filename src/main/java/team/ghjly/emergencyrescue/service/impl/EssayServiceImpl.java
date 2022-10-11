@@ -14,6 +14,13 @@ public class EssayServiceImpl implements EssayService {
     EssayMapper essayMapper;
 
 
+    /**
+     * 根据过滤文章信息分页获取文章列表
+     * @param pageSize
+     * @param pageNum
+     * @param essay
+     * @return
+     */
     @Override
     public List<Essay> getEssayListPageByEssay(Integer pageSize, Integer pageNum, Essay essay) {
         Integer startIndex = (pageNum - 1) * pageSize;

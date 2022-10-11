@@ -61,6 +61,11 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    /**
+     * 根据id文本获取用户信息
+     * @param uId
+     * @return
+     */
     @Override
     public User getUserByUIdText(Integer uId) {
         return userMapper.selectUserByUIdText(uId);

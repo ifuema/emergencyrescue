@@ -21,6 +21,12 @@ public class EssayController {
     private ResultVO<?> noData = new ResultVO<>(ResultCode.VALIDATE_FAILED, "当前页不存在数据！");
 
 
+    /**
+     * 分页获取文章
+     * @param pageNum
+     * @param essay
+     * @return
+     */
     @GetMapping("/page/{pageNum}")
     public ResultVO<?> page(@PathVariable Integer pageNum, Essay essay) {
         List<Essay> essayList = essayService.getEssayListPageByEssay(pageSize, pageNum, essay);

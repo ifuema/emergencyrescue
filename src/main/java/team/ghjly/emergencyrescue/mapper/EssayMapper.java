@@ -9,6 +9,13 @@ import java.util.List;
 
 @Mapper
 public interface EssayMapper {
+    /**
+     * 根据过滤文章信息分页查询文章列表
+     * @param pageSize
+     * @param startIndex
+     * @param essay
+     * @return
+     */
     @SelectProvider(type = EssayMapperSqlProvider.class, method = "selectEssayListPageByEssaySql")
     List<Essay> selectEssayListPageByEssay(Integer pageSize, Integer startIndex, Essay essay);
 }

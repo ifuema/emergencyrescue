@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 public class AdminController {
     @Resource
     private AdminService adminService;
+    private ResultVO<?> success = new ResultVO<>();
     private ResultVO<?> accountNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号不存在！");
     private ResultVO<?> accountAndPasswordError = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号密码错误！");
 
@@ -43,7 +44,7 @@ public class AdminController {
             }
             if (result) {
                 request.getSession().setAttribute("admin", dataAdmin);
-                return new ResultVO<>();
+                return success;
             } else {
                 return accountAndPasswordError;
             }

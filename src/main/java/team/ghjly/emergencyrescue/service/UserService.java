@@ -31,5 +31,10 @@ public interface UserService {
      */
     boolean checkUserByUAccountAndUPassword(User user);
 
+    /**
+     * 根据id文本获取用户信息
+     * @param uId
+     * @return
+     */
     User getUserByUIdText(Integer uId);
 }

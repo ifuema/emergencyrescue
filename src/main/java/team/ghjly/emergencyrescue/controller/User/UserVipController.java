@@ -20,7 +20,11 @@ public class UserVipController {
     private ResultVO<?> userNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "用户不存在！");
 
 
-
+    /**
+     * 获取已登录用户信息
+     * @param request
+     * @return
+     */
     @GetMapping("/my")
     public ResultVO<?> my(HttpServletRequest request) {
         HttpSession session = request.getSession();

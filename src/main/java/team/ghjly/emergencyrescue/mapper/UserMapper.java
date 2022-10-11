@@ -39,6 +39,11 @@ public interface UserMapper {
     @Select("SELECT u_id FROM user WHERE u_account = #{uAccount} AND u_password = #{uPassword}")
     Integer selectUIdByAccountAndPassword(User user);
 
+    /**
+     * 根据id文本查询用户信息
+     * @param uId
+     * @return
+     */
     @Select("SELECT u_id, u_name, u_account, u_telephone, u_email FROM user WHERE u_id = #{uId}")
     User selectUserByUIdText(Integer uId);
 }

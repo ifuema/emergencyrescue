@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
     @Resource
     private UserService userService;
+    private ResultVO<?> success = new ResultVO<>();
     private ResultVO<?> accountNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号不存在！");
     private ResultVO<?> accountExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号已存在！");
     private ResultVO<?> registFailed = new ResultVO<>(ResultCode.FAILED, "注册失败！");
@@ -43,7 +44,7 @@ public class UserController {
             }
             if (result) {
                 request.getSession().setAttribute("user", dataUser);
-                return new ResultVO<>();
+                return success;
             } else {
                 return accountAndPasswordError;
             }
@@ -62,10 +63,16 @@ public class UserController {
         } else {
             user.setUPassword(BCrypt.hashpw(user.getUPassword(), BCrypt.gensalt()));
             if (userService.saveUser(user) >= 1) {
-                return new ResultVO<>();
+                return success;
             } else {
                 return registFailed;
             }
         }
+    }
+
+    @GetMapping("/logout")
+    public ResultVO<?> logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("user");
+        return success;
     }
 }
