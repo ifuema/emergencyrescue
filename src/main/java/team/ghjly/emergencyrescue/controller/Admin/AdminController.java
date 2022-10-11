@@ -1,4 +1,4 @@
-package team.ghjly.emergencyrescue.controller;
+package team.ghjly.emergencyrescue.controller.Admin;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.validation.annotation.Validated;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.ghjly.emergencyrescue.entity.Admin;
 import team.ghjly.emergencyrescue.entity.ResultCode;
-import team.ghjly.emergencyrescue.entity.User;
 import team.ghjly.emergencyrescue.entity.groups.Login;
 import team.ghjly.emergencyrescue.service.AdminService;
 import team.ghjly.emergencyrescue.vo.ResultVO;
@@ -21,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 public class AdminController {
     @Resource
     private AdminService adminService;
+    private ResultVO<?> accountNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号不存在！");
+    private ResultVO<?> accountAndPasswordError = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号密码错误！");
 
 
     /**
@@ -33,7 +34,7 @@ public class AdminController {
     public ResultVO<?> login(@RequestBody @Validated({Login.class}) Admin admin, HttpServletRequest request) {
         Admin dataAdmin = adminService.getAdminPrivateByAAccountText(admin.getAAccount());
         if (dataAdmin == null) {
-            return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号不存在！");
+            return accountNotExist;
         } else {
             boolean result = false;
             try {
@@ -44,7 +45,7 @@ public class AdminController {
                 request.getSession().setAttribute("admin", dataAdmin);
                 return new ResultVO<>();
             } else {
-                return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号密码错误！");
+                return accountAndPasswordError;
             }
         }
     }

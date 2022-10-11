@@ -1,4 +1,4 @@
-package team.ghjly.emergencyrescue.controller;
+package team.ghjly.emergencyrescue.controller.User;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
     @Resource
     private UserService userService;
+    private ResultVO<?> accountNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号不存在！");
+    private ResultVO<?> accountExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号已存在！");
+    private ResultVO<?> registFailed = new ResultVO<>(ResultCode.FAILED, "注册失败！");
+    private ResultVO<?> accountAndPasswordError = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号密码错误！");
 
 
     /**
@@ -30,7 +34,7 @@ public class UserController {
     public ResultVO<?> login(@RequestBody @Validated({Login.class}) User user, HttpServletRequest request) {
         User dataUser = userService.getUserPrivateByUAccountText(user.getUAccount());
         if (dataUser == null) {
-            return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号不存在！");
+            return accountNotExist;
         } else {
             boolean result = false;
             try {
@@ -41,7 +45,7 @@ public class UserController {
                 request.getSession().setAttribute("user", dataUser);
                 return new ResultVO<>();
             } else {
-                return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号密码错误！");
+                return accountAndPasswordError;
             }
         }
     }
@@ -54,13 +58,13 @@ public class UserController {
     @PostMapping("/regist")
     public ResultVO<?> regist(@RequestBody @Validated({Regist.class}) User user) {
         if (userService.checkUserByUAccountText(user.getUAccount())) {
-            return new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号已存在！");
+            return accountExist;
         } else {
             user.setUPassword(BCrypt.hashpw(user.getUPassword(), BCrypt.gensalt()));
             if (userService.saveUser(user) >= 1) {
                 return new ResultVO<>();
             } else {
-                return new ResultVO<>(ResultCode.FAILED, "注册失败！");
+                return registFailed;
             }
         }
     }

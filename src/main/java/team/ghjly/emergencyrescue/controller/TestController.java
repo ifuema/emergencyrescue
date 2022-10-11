@@ -19,11 +19,10 @@ public class TestController {
     private UserService userService;
 
 
-//    @GetMapping("/test")
-//    public ResultVO test(HttpServletRequest request) {
-//        System.out.println(request.getSession().getAttribute("user"));
-//        return new ResultVO();
-//    }
+    @GetMapping("/user/vip/login")
+    public ResultVO test(HttpServletRequest request) {
+        return new ResultVO("dfyghj");
+    }
 //
 //    @PostMapping("/login1")
 //    public User login(@RequestBody @Validated({Login.class}) User user, HttpServletRequest request) {

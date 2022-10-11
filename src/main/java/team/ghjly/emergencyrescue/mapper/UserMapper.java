@@ -7,22 +7,6 @@ import team.ghjly.emergencyrescue.entity.User;
 
 @Mapper
 public interface UserMapper {
-//    /**
-//     * 根据账号和密码查询用户信息
-//     * @param user
-//     * @return
-//     */
-//    @Select("SELECT u_id, u_name, u_account, u_telephone, u_email FROM user WHERE u_account = #{uAccount} AND u_password = #{uPassword}")
-//    User selectUserByAccountAndPassword(User user);
-//
-//    /**
-//     * 根据账号查询用户信息
-//     * @param user
-//     * @return
-//     */
-//    @Select("SELECT u_id, u_name, u_account FROM user WHERE u_account = #{uAccount}")
-//    User selectUserByAccount(User user);
-
     /**
      *插入一条用户信息
      * @param user
@@ -46,4 +30,15 @@ public interface UserMapper {
      */
     @Select("SELECT u_id FROM user WHERE u_account = #{uAccount}")
     Integer selectUIdByAccountText(Integer uAccount);
+
+    /**
+     * 根据账号密码查询用户id
+     * @param user
+     * @return
+     */
+    @Select("SELECT u_id FROM user WHERE u_account = #{uAccount} AND u_password = #{uPassword}")
+    Integer selectUIdByAccountAndPassword(User user);
+
+    @Select("SELECT u_id, u_name, u_account, u_telephone, u_email FROM user WHERE u_id = #{uId}")
+    User selectUserByUIdText(Integer uId);
 }

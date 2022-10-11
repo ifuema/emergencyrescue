@@ -23,4 +23,13 @@ public interface UserService {
      * @return
      */
     User getUserPrivateByUAccountText(Integer uAccount);
+
+    /**
+     * 根据账号密码判断是否已存在用户
+     * @param user
+     * @return
+     */
+    boolean checkUserByUAccountAndUPassword(User user);
+
+    User getUserByUIdText(Integer uId);
 }
