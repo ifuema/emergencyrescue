@@ -70,6 +70,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 登出
+     * @param request
+     * @return
+     */
     @GetMapping("/logout")
     public ResultVO<?> logout(HttpServletRequest request) {
         request.getSession().removeAttribute("user");

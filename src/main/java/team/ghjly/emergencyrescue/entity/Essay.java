@@ -2,11 +2,15 @@ package team.ghjly.emergencyrescue.entity;
 
 
 public class Essay {
-
+  //文章编号
   private Integer eId;
+  //文章标题
   private String eTitle;
+  //文章图片
   private String eImg;
+  //文章内容
   private String eBody;
+  //文章类型
   private Integer eType;
 
 
