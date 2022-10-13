@@ -22,6 +22,12 @@ public class TeamController {
     private ResultVO<?> noData = new ResultVO<>(ResultCode.VALIDATE_FAILED, "当前页不存在数据！");
 
 
+    /**
+     * 分页获取救援队
+     * @param pageNum
+     * @param team
+     * @return
+     */
     @GetMapping("/page/{pageNum}")
     public ResultVO<?> page(@PathVariable Integer pageNum, Team team) {
         List<Team> teamList = teamService.getTeamPublicListPageByTeam(pageSize, pageNum, team);

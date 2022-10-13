@@ -19,7 +19,7 @@ public class EssayController {
     EssayService essayService;
     private int pageSize = 10;
     private ResultVO<?> noData = new ResultVO<>(ResultCode.VALIDATE_FAILED, "当前页不存在数据！");
-
+    private ResultVO<?> essayNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "文章不存在！");
 
     /**
      * 分页获取文章
@@ -34,6 +34,16 @@ public class EssayController {
             return noData;
         } else {
             return new ResultVO<>(essayList);
+        }
+    }
+
+    @GetMapping("/{eId}")
+    public ResultVO<?> getTeam(@PathVariable Integer eId) {
+        Essay essay = essayService.getEssayByEIdText(eId);
+        if (essay == null) {
+            return essayNotExist;
+        } else {
+            return new ResultVO<>(essay);
         }
     }
 }

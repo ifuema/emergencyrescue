@@ -26,4 +26,9 @@ public class EssayServiceImpl implements EssayService {
         Integer startIndex = (pageNum - 1) * pageSize;
         return essayMapper.selectEssayListPageByEssay(pageSize, startIndex, essay);
     }
+
+    @Override
+    public Essay getEssayByEIdText(Integer eId) {
+        return essayMapper.selectEssayByEIdText(eId);
+    }
 }

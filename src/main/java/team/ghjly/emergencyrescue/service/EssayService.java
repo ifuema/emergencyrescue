@@ -13,4 +13,6 @@ public interface EssayService {
      * @return
      */
     List<Essay> getEssayListPageByEssay(Integer pageSize, Integer pageNum, Essay essay);
+
+    Essay getEssayByEIdText(Integer eId);
 }
