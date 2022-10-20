@@ -23,6 +23,9 @@ public class UserInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            return true;
+        }
         response.setContentType("application/json;charset=utf-8");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");

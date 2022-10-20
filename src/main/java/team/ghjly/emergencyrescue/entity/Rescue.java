@@ -13,8 +13,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Rescue {
-  @Resource
-  private DateTimeFormatter dateTimeFormatter;
   private Integer rId;
   private Integer tId;
   private Integer uId;
@@ -33,7 +31,7 @@ public class Rescue {
   @NotNull(message = "电话不能为空！", groups = {Regist.class})
   @PositiveOrZero(message = "电话格式不正确！", groups = {Regist.class})
   @DecimalMax(value = "99999999999", message = "电话号码过长！", groups = {Regist.class})
-  private Integer rTelephone;
+  private Long rTelephone;
   private String rState;
   private LocalDateTime rTime;
   @Size(max = 255, message = "既往病史过长！", groups = {Regist.class})
@@ -107,11 +105,11 @@ public class Rescue {
   }
 
 
-  public Integer getRTelephone() {
+  public Long getRTelephone() {
     return rTelephone;
   }
 
-  public void setRTelephone(Integer rTelephone) {
+  public void setRTelephone(Long rTelephone) {
     this.rTelephone = rTelephone;
   }
 
@@ -164,7 +162,6 @@ public class Rescue {
   @Override
   public String toString() {
     return "Rescue{" +
-            "dateTimeFormatter=" + dateTimeFormatter +
             ", rId=" + rId +
             ", tId=" + tId +
             ", uId=" + uId +
