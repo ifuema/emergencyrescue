@@ -33,8 +33,12 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public int saveUser(User user) {
-        return userMapper.insertUser(user);
+    public boolean saveUser(User user) {
+        if (userMapper.insertUser(user) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -15,7 +15,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    int saveUser(User user);
+    boolean saveUser(User user);
 
     /**
      * 根据账号文本获取用户隐私信息

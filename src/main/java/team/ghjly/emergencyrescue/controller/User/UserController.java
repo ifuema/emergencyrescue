@@ -62,7 +62,7 @@ public class UserController {
             return accountExist;
         } else {
             user.setUPassword(BCrypt.hashpw(user.getUPassword(), BCrypt.gensalt()));
-            if (userService.saveUser(user) >= 1) {
+            if (userService.saveUser(user)) {
                 return success;
             } else {
                 return registFailed;

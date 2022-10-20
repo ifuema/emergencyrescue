@@ -16,10 +16,11 @@ import java.util.List;
 @RequestMapping("/essay")
 public class EssayController {
     @Resource
-    EssayService essayService;
+    private EssayService essayService;
     private int pageSize = 10;
     private ResultVO<?> noData = new ResultVO<>(ResultCode.VALIDATE_FAILED, "当前页不存在数据！");
     private ResultVO<?> essayNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "文章不存在！");
+
 
     /**
      * 分页获取文章
@@ -37,6 +38,11 @@ public class EssayController {
         }
     }
 
+    /**
+     * 获取文章
+     * @param eId
+     * @return
+     */
     @GetMapping("/{eId}")
     public ResultVO<?> getTeam(@PathVariable Integer eId) {
         Essay essay = essayService.getEssayByEIdText(eId);

@@ -14,5 +14,10 @@ public interface EssayService {
      */
     List<Essay> getEssayListPageByEssay(Integer pageSize, Integer pageNum, Essay essay);
 
+    /**
+     * 根据id文本获取文章信息
+     * @param eId
+     * @return
+     */
     Essay getEssayByEIdText(Integer eId);
 }

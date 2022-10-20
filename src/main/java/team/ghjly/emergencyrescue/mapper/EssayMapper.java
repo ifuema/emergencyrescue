@@ -20,6 +20,11 @@ public interface EssayMapper {
     @SelectProvider(type = EssayMapperSqlProvider.class, method = "selectEssayListPageByEssaySql")
     List<Essay> selectEssayListPageByEssay(Integer pageSize, Integer startIndex, Essay essay);
 
+    /**
+     * 根据id文本查询文章信息
+     * @param eId
+     * @return
+     */
     @Select("SELECT * FROM essay WHERE e_id = #{eId}")
     Essay selectEssayByEIdText(Integer eId);
 }

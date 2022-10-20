@@ -27,6 +27,11 @@ public class EssayServiceImpl implements EssayService {
         return essayMapper.selectEssayListPageByEssay(pageSize, startIndex, essay);
     }
 
+    /**
+     * 根据id文本获取文章信息
+     * @param eId
+     * @return
+     */
     @Override
     public Essay getEssayByEIdText(Integer eId) {
         return essayMapper.selectEssayByEIdText(eId);

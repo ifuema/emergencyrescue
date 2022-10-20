@@ -1,32 +1,45 @@
 package team.ghjly.emergencyrescue.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team.ghjly.emergencyrescue.entity.User;
 import team.ghjly.emergencyrescue.entity.groups.Login;
+import team.ghjly.emergencyrescue.entity.groups.Regist;
 import team.ghjly.emergencyrescue.service.UserService;
 import team.ghjly.emergencyrescue.vo.ResultVO;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @RestController
+//@Validated
 public class TestController {
     @Resource
     private UserService userService;
 
 
-    @GetMapping("/user/vip/login")
-    public ResultVO test(HttpServletRequest request) {
-        return new ResultVO("dfyghj");
-    }
+//    @GetMapping("/a")
+//    public Integer test( @PositiveOrZero(message = "电话格式不正确！")  Integer integer) {
+//        return integer;
+//    }
 //
 //    @PostMapping("/login1")
-//    public User login(@RequestBody @Validated({Login.class}) User user, HttpServletRequest request) {
-//        User dataUser = userService.getUserByAccountAndPassword(user);
-//        return dataUser;
+//    public LocalDateTime login(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime localDateTime) {
+//        return localDateTime;
 //    }
+
+//public static void main(String[] args) {
+////    System.out.println(System.currentTimeMillis());
+//    Double a = 50.1;
+//    Double b = 40.2;
+//    Double c = a+ b;
+//    System.out.println(c);
+//}
 }

@@ -2,6 +2,7 @@ package team.ghjly.emergencyrescue.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import team.ghjly.emergencyrescue.entity.User;
 
@@ -12,7 +13,9 @@ public interface UserMapper {
      * @param user
      * @return
      */
-    @Insert("INSERT INTO user (u_id, u_name, u_account, u_password, u_telephone, u_email) VALUES (null, #{uName}, #{uAccount}, #{uPassword}, #{uTelephone}, #{uEmail})")
+    @Insert("INSERT INTO user (u_name, u_account, u_password, u_telephone, u_email) " +
+            "VALUES (#{uName}, #{uAccount}, #{uPassword}, #{uTelephone}, #{uEmail})")
+    @Options(useGeneratedKeys = true, keyProperty = "uId", keyColumn = "u_id")
     int insertUser(User user);
 
     /**
