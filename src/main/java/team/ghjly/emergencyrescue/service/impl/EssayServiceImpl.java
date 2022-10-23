@@ -13,7 +13,6 @@ public class EssayServiceImpl implements EssayService {
     @Resource
     EssayMapper essayMapper;
 
-
     /**
      * 根据过滤文章信息分页获取文章列表
      * @param pageSize
@@ -33,7 +32,7 @@ public class EssayServiceImpl implements EssayService {
      * @return
      */
     @Override
-    public Essay getEssayByEIdText(Integer eId) {
-        return essayMapper.selectEssayByEIdText(eId);
+    public Essay getEssayByEId(Integer eId) {
+        return essayMapper.selectEssayByEId(eId);
     }
 }

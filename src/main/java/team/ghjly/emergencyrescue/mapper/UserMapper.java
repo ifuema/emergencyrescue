@@ -24,7 +24,7 @@ public interface UserMapper {
      * @return
      */
     @Select("SELECT * FROM user WHERE u_account = #{uAccount}")
-    User selectUserPrivateByUAccountText(Integer uAccount);
+    User selectUserPrivateByUAccount(Integer uAccount);
 
     /**
      * 根据账号文本查询用户id
@@ -32,7 +32,7 @@ public interface UserMapper {
      * @return
      */
     @Select("SELECT u_id FROM user WHERE u_account = #{uAccount}")
-    Integer selectUIdByAccountText(Integer uAccount);
+    Integer selectUIdByAccount(Integer uAccount);
 
     /**
      * 根据账号密码查询用户id
@@ -48,5 +48,5 @@ public interface UserMapper {
      * @return
      */
     @Select("SELECT u_id, u_name, u_account, u_telephone, u_email FROM user WHERE u_id = #{uId}")
-    User selectUserByUIdText(Integer uId);
+    User selectUserByUId(Integer uId);
 }

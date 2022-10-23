@@ -12,16 +12,15 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
-
     /**
      * 根据账号文本判断是否已存在用户
      * @param uAccount
      * @return
      */
     @Override
-    public boolean checkUserByUAccountText(Integer uAccount) {
-        Integer uId = userMapper.selectUIdByAccountText(uAccount);
-        if (uId == null) {
+    public boolean checkUserByUAccount(Integer uAccount) {
+        Integer dataUId = userMapper.selectUIdByAccount(uAccount);
+        if (dataUId == null) {
             return false;
         }
         return true;
@@ -47,8 +46,8 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public User getUserPrivateByUAccountText(Integer uAccount) {
-        return userMapper.selectUserPrivateByUAccountText(uAccount);
+    public User getUserPrivateByUAccount(Integer uAccount) {
+        return userMapper.selectUserPrivateByUAccount(uAccount);
     }
 
     /**
@@ -58,8 +57,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean checkUserByUAccountAndUPassword(User user) {
-        Integer uId = userMapper.selectUIdByAccountAndPassword(user);
-        if (uId == null) {
+        Integer dataUId = userMapper.selectUIdByAccountAndPassword(user);
+        if (dataUId == null) {
             return false;
         }
         return true;
@@ -71,7 +70,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public User getUserByUIdText(Integer uId) {
-        return userMapper.selectUserByUIdText(uId);
+    public User getUserByUId(Integer uId) {
+        return userMapper.selectUserByUId(uId);
     }
 }

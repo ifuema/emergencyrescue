@@ -8,5 +8,5 @@ public interface AdminService {
      * @param aAccount
      * @return
      */
-    Admin getAdminPrivateByAAccountText(Integer aAccount);
+    Admin getAdminPrivateByAAccount(Integer aAccount);
 }

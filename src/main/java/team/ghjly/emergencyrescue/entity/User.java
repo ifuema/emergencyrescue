@@ -14,7 +14,7 @@ public class User {
   private String uName;
   //用户账号
   @NotNull(message = "账号不能为空！", groups = {Login.class, Regist.class})
-  @PositiveOrZero(message = "账号格式不正确！", groups = {Login.class, Regist.class})
+  @PositiveOrZero(message = "账号格式不正确！", groups = {Regist.class})
   private Integer uAccount;
   //用户密码
   @NotBlank(message = "密码不能为空！", groups = {Login.class, Regist.class})
@@ -29,53 +29,59 @@ public class User {
   private String uEmail;
 
 
-  public Integer getUId() {
+  public Integer getuId() {
     return uId;
   }
 
-  public void setUId(Integer uId) {
+  public void setuId(Integer uId) {
     this.uId = uId;
   }
 
-  public String getUName() {
+
+  public String getuName() {
     return uName;
   }
 
-  public void setUName(String uName) {
+  public void setuName(String uName) {
     this.uName = uName;
   }
 
-  public Integer getUAccount() {
+
+  public Integer getuAccount() {
     return uAccount;
   }
 
-  public void setUAccount(Integer uAccount) {
+  public void setuAccount(Integer uAccount) {
     this.uAccount = uAccount;
   }
 
-  public String getUPassword() {
+
+  public String getuPassword() {
     return uPassword;
   }
 
-  public void setUPassword(String uPassword) {
+  public void setuPassword(String uPassword) {
     this.uPassword = uPassword;
   }
 
-  public Long getUTelephone() {
+
+  public Long getuTelephone() {
     return uTelephone;
   }
 
-  public void setUTelephone(Long uTelephone) {
+  public void setuTelephone(Long uTelephone) {
     this.uTelephone = uTelephone;
   }
 
-  public String getUEmail() {
+
+  public String getuEmail() {
     return uEmail;
   }
 
-  public void setUEmail(String uEmail) {
+  public void setuEmail(String uEmail) {
     this.uEmail = uEmail;
   }
+
 
   @Override
   public String toString() {

@@ -4,7 +4,7 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import team.ghjly.emergencyrescue.entity.ResultCode;
+import team.ghjly.emergencyrescue.vo.ResultCode;
 import team.ghjly.emergencyrescue.entity.User;
 import team.ghjly.emergencyrescue.service.UserService;
 import team.ghjly.emergencyrescue.vo.ResultVO;
@@ -18,15 +18,15 @@ import javax.servlet.http.HttpSession;
 public class UserInterceptor implements HandlerInterceptor {
     @Resource
     private UserService userService;
-    private String stateInvalidJson = JSON.toJSONString(new ResultVO<>(ResultCode.PERMISSION_REGECT, "登录已过期！"), JSONWriter.Feature.WriteMapNullValue);
-    private String notLoginJson = JSON.toJSONString(new ResultVO<>(ResultCode.PERMISSION_REGECT, "未登录！"), JSONWriter.Feature.WriteMapNullValue);
+    private final String stateInvalidJson = JSON.toJSONString(new ResultVO<>(ResultCode.PERMISSION_REGECT, "登录已过期！"), JSONWriter.Feature.WriteMapNullValue);
+    private final String notLoginJson = JSON.toJSONString(new ResultVO<>(ResultCode.PERMISSION_REGECT, "未登录！"), JSONWriter.Feature.WriteMapNullValue);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             return true;
         }
-        response.setContentType("application/json;charset=utf-8");
+        response.setContentType("application/json;charset=UTF-8");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {

@@ -8,7 +8,7 @@ public interface UserService {
      * @param uAccount
      * @return
      */
-    boolean checkUserByUAccountText(Integer uAccount);
+    boolean checkUserByUAccount(Integer uAccount);
 
     /**
      * 新增用户
@@ -22,7 +22,7 @@ public interface UserService {
      * @param uAccount
      * @return
      */
-    User getUserPrivateByUAccountText(Integer uAccount);
+    User getUserPrivateByUAccount(Integer uAccount);
 
     /**
      * 根据账号密码判断是否已存在用户
@@ -36,5 +36,5 @@ public interface UserService {
      * @param uId
      * @return
      */
-    User getUserByUIdText(Integer uId);
+    User getUserByUId(Integer uId);
 }

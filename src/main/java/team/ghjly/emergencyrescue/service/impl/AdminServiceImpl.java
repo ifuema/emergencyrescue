@@ -12,14 +12,13 @@ public class AdminServiceImpl implements AdminService {
     @Resource
     private AdminMapper adminMapper;
 
-
     /**
      * 根据账号文本获取管理员隐私信息
      * @param aAccount
      * @return
      */
     @Override
-    public Admin getAdminPrivateByAAccountText(Integer aAccount) {
-        return adminMapper.selectAdminPrivateByUAccountText(aAccount);
+    public Admin getAdminPrivateByAAccount(Integer aAccount) {
+        return adminMapper.selectAdminPrivateByUAccount(aAccount);
     }
 }

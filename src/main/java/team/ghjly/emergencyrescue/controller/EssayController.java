@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.ghjly.emergencyrescue.entity.Essay;
-import team.ghjly.emergencyrescue.entity.ResultCode;
+import team.ghjly.emergencyrescue.vo.ResultCode;
 import team.ghjly.emergencyrescue.service.EssayService;
 import team.ghjly.emergencyrescue.vo.ResultVO;
 
@@ -17,10 +17,9 @@ import java.util.List;
 public class EssayController {
     @Resource
     private EssayService essayService;
-    private int pageSize = 10;
-    private ResultVO<?> noData = new ResultVO<>(ResultCode.VALIDATE_FAILED, "当前页不存在数据！");
-    private ResultVO<?> essayNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "文章不存在！");
-
+    private int pageSize = 5;
+    private final ResultVO<?> noData = new ResultVO<>(ResultCode.VALIDATE_FAILED, "当前页不存在数据！");
+    private final ResultVO<?> essayNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "文章不存在！");
 
     /**
      * 分页获取文章
@@ -30,11 +29,11 @@ public class EssayController {
      */
     @GetMapping("/page/{pageNum}")
     public ResultVO<?> page(@PathVariable Integer pageNum, Essay essay) {
-        List<Essay> essayList = essayService.getEssayListPageByEssay(pageSize, pageNum, essay);
-        if (essayList.isEmpty()) {
+        List<Essay> dataEssayList = essayService.getEssayListPageByEssay(pageSize, pageNum, essay);
+        if (dataEssayList.isEmpty()) {
             return noData;
         } else {
-            return new ResultVO<>(essayList);
+            return new ResultVO<>(dataEssayList);
         }
     }
 
@@ -44,12 +43,12 @@ public class EssayController {
      * @return
      */
     @GetMapping("/{eId}")
-    public ResultVO<?> getTeam(@PathVariable Integer eId) {
-        Essay essay = essayService.getEssayByEIdText(eId);
-        if (essay == null) {
+    public ResultVO<?> getEssay(@PathVariable Integer eId) {
+        Essay dataEssay = essayService.getEssayByEId(eId);
+        if (dataEssay == null) {
             return essayNotExist;
         } else {
-            return new ResultVO<>(essay);
+            return new ResultVO<>(dataEssay);
         }
     }
 }

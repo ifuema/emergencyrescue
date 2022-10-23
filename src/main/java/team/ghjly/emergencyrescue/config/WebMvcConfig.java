@@ -15,7 +15,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Resource
     private UserInterceptor userInterceptor;
 
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedOriginPatterns("*").allowedHeaders("*").allowedMethods("*").allowCredentials(true);

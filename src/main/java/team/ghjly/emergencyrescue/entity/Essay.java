@@ -1,6 +1,5 @@
 package team.ghjly.emergencyrescue.entity;
 
-
 public class Essay {
   //文章编号
   private Integer eId;
@@ -14,49 +13,50 @@ public class Essay {
   private Integer eType;
 
 
-  public Integer getEId() {
+  public Integer geteId() {
     return eId;
   }
 
-  public void setEId(Integer eId) {
+  public void seteId(Integer eId) {
     this.eId = eId;
   }
 
 
-  public String getETitle() {
+  public String geteTitle() {
     return eTitle;
   }
 
-  public void setETitle(String eTitle) {
+  public void seteTitle(String eTitle) {
     this.eTitle = eTitle;
   }
 
 
-  public String getEImg() {
+  public String geteImg() {
     return eImg;
   }
 
-  public void setEImg(String eImg) {
+  public void seteImg(String eImg) {
     this.eImg = eImg;
   }
 
 
-  public String getEBody() {
+  public String geteBody() {
     return eBody;
   }
 
-  public void setEBody(String eBody) {
+  public void seteBody(String eBody) {
     this.eBody = eBody;
   }
 
 
-  public Integer getEType() {
+  public Integer geteType() {
     return eType;
   }
 
-  public void setEType(Integer eType) {
+  public void seteType(Integer eType) {
     this.eType = eType;
   }
+
 
   @Override
   public String toString() {

@@ -1,7 +1,5 @@
 package team.ghjly.emergencyrescue.vo;
 
-import team.ghjly.emergencyrescue.entity.ResultCode;
-
 public class ResultVO<T> {
     // 状态码
     private int code;
@@ -9,7 +7,6 @@ public class ResultVO<T> {
     private String msg;
     // 响应的具体数据
     private T data;
-
 
     public ResultVO() {
         this(ResultCode.SUCCESS, "请求成功", null);

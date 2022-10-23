@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import team.ghjly.emergencyrescue.entity.Commodity;
+import team.ghjly.emergencyrescue.entity.Rescue;
 import team.ghjly.emergencyrescue.entity.User;
 import team.ghjly.emergencyrescue.entity.groups.Login;
 import team.ghjly.emergencyrescue.entity.groups.Regist;
@@ -30,16 +32,22 @@ public class TestController {
 //        return integer;
 //    }
 //
-//    @PostMapping("/login1")
-//    public LocalDateTime login(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime localDateTime) {
-//        return localDateTime;
-//    }
+    @PostMapping("/login1")
+    public LocalDateTime login(@RequestBody Rescue rescue) {
+        return rescue.getrTime();
+//        BigDecimal cPrice = commodity.getCPrice();
+//        cPrice.setScale(2,BigDecimal.ROUND_DOWN);
+//        System.out.println(cPrice);
+//        return commodity;
+    }
 
 //public static void main(String[] args) {
 ////    System.out.println(System.currentTimeMillis());
-//    Double a = 50.1;
-//    Double b = 40.2;
-//    Double c = a+ b;
-//    System.out.println(c);
+////    Double a = 50.1;
+////    Double b = 40.2;
+////    Double c = a+ b;
+////    System.out.println(c);
+////    System.out.println(new BigDecimal("1.20").add(new BigDecimal("2")));
+//    System.out.println(System.currentTimeMillis());
 //}
 }

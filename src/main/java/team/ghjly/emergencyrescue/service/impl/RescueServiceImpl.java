@@ -12,6 +12,11 @@ public class RescueServiceImpl implements RescueService {
     @Resource
     RescueMapper rescueMapper;
 
+    /**
+     * 新增救援
+     * @param rescue
+     * @return
+     */
     @Override
     public boolean saveRescue(Rescue rescue) {
         if (rescueMapper.insertRescue(rescue) >= 1) {

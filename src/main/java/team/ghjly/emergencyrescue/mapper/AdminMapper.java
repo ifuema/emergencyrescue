@@ -12,5 +12,5 @@ public interface AdminMapper {
      * @return
      */
     @Select("SELECT * FROM admin WHERE a_account = #{aAccount}")
-    Admin selectAdminPrivateByUAccountText(Integer aAccount);
+    Admin selectAdminPrivateByUAccount(Integer aAccount);
 }

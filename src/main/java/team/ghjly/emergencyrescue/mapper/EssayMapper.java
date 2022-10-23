@@ -26,5 +26,5 @@ public interface EssayMapper {
      * @return
      */
     @Select("SELECT * FROM essay WHERE e_id = #{eId}")
-    Essay selectEssayByEIdText(Integer eId);
+    Essay selectEssayByEId(Integer eId);
 }

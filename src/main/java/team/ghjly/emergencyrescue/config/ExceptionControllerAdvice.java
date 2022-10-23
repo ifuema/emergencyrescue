@@ -4,7 +4,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import team.ghjly.emergencyrescue.entity.ResultCode;
+import team.ghjly.emergencyrescue.vo.ResultCode;
 import team.ghjly.emergencyrescue.vo.ResultVO;
 
 @RestControllerAdvice

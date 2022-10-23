@@ -1,134 +1,141 @@
 package team.ghjly.emergencyrescue.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-import team.ghjly.emergencyrescue.entity.groups.Login;
 import team.ghjly.emergencyrescue.entity.groups.Regist;
 
-import javax.annotation.Resource;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class Rescue {
+  //救援编号
   private Integer rId;
+  //申请救援队编号
   private Integer tId;
+  //申请救援用户编号
   private Integer uId;
+  //救助人姓名
   @NotBlank(message = "姓名不能为空！", groups = {Regist.class})
   @Size(max = 8, message = "姓名过长！", groups = {Regist.class})
   private String rName;
+  //救助人年龄
   @NotNull(message = "年龄不能为空！", groups = {Regist.class})
   @PositiveOrZero(message = "年龄格式不正确！", groups = {Regist.class})
   private Integer rAge;
+  //救助人性别
   @NotNull(message = "性别不能为空！", groups = {Regist.class})
   @Pattern(regexp = "^[男女]$", message = "性别只能为男或女！", groups = {Regist.class})
   private String rGender;
+  //救助人地址
   @NotBlank(message = "地址不能为空！", groups = {Regist.class})
   @Size(max = 255, message = "地址过长！", groups = {Regist.class})
   private String rAddress;
+  //救助人联系电话
   @NotNull(message = "电话不能为空！", groups = {Regist.class})
   @PositiveOrZero(message = "电话格式不正确！", groups = {Regist.class})
   @DecimalMax(value = "99999999999", message = "电话号码过长！", groups = {Regist.class})
   private Long rTelephone;
+  //救助状态
   private String rState;
+  //申请救援时间
   private LocalDateTime rTime;
+  //救助人既往病史
   @Size(max = 255, message = "既往病史过长！", groups = {Regist.class})
   private String pastMedicalHistory;
+  //救助人过敏史
   @Size(max = 255, message = "过敏史过长！", groups = {Regist.class})
   private String allergyHistory;
+  //救援描述
   @NotNull(message = "描述不能为空！", groups = {Regist.class})
   private String rDescribe;
 
 
-  public Integer getRId() {
+  public Integer getrId() {
     return rId;
   }
 
-  public void setRId(Integer rId) {
+  public void setrId(Integer rId) {
     this.rId = rId;
   }
 
 
-  public Integer getTId() {
+  public Integer gettId() {
     return tId;
   }
 
-  public void setTId(Integer tId) {
+  public void settId(Integer tId) {
     this.tId = tId;
   }
 
 
-  public Integer getUId() {
+  public Integer getuId() {
     return uId;
   }
 
-  public void setUId(Integer uId) {
+  public void setuId(Integer uId) {
     this.uId = uId;
   }
 
 
-  public String getRName() {
+  public String getrName() {
     return rName;
   }
 
-  public void setRName(String rName) {
+  public void setrName(String rName) {
     this.rName = rName;
   }
 
 
-  public Integer getRAge() {
+  public Integer getrAge() {
     return rAge;
   }
 
-  public void setRAge(Integer rAge) {
+  public void setrAge(Integer rAge) {
     this.rAge = rAge;
   }
 
 
-  public String getRGender() {
+  public String getrGender() {
     return rGender;
   }
 
-  public void setRGender(String rGender) {
+  public void setrGender(String rGender) {
     this.rGender = rGender;
   }
 
 
-  public String getRAddress() {
+  public String getrAddress() {
     return rAddress;
   }
 
-  public void setRAddress(String rAddress) {
+  public void setrAddress(String rAddress) {
     this.rAddress = rAddress;
   }
 
 
-  public Long getRTelephone() {
+  public Long getrTelephone() {
     return rTelephone;
   }
 
-  public void setRTelephone(Long rTelephone) {
+  public void setrTelephone(Long rTelephone) {
     this.rTelephone = rTelephone;
   }
 
 
-  public String getRState() {
+  public String getrState() {
     return rState;
   }
 
-  public void setRState(String rState) {
+  public void setrState(String rState) {
     this.rState = rState;
   }
 
 
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  public LocalDateTime getRTime() {
+  public LocalDateTime getrTime() {
     return rTime;
   }
 
-  public void setRTime(LocalDateTime rTime) {
+  public void setrTime(LocalDateTime rTime) {
     this.rTime = rTime;
   }
 
@@ -151,13 +158,14 @@ public class Rescue {
   }
 
 
-  public String getRDescribe() {
+  public String getrDescribe() {
     return rDescribe;
   }
 
-  public void setRDescribe(String rDescribe) {
+  public void setrDescribe(String rDescribe) {
     this.rDescribe = rDescribe;
   }
+
 
   @Override
   public String toString() {
