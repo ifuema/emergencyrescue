@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import team.ghjly.emergencyrescue.entity.Commodity;
 import team.ghjly.emergencyrescue.mapper.sql.CommodityMapperSqlProvider;
-import team.ghjly.emergencyrescue.mapper.sql.TeamMapperSqlProvider;
 
 import java.util.List;
 

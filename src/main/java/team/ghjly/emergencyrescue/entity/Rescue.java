@@ -8,7 +8,9 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import team.ghjly.emergencyrescue.entity.groups.Regist;
 
 import javax.validation.constraints.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.concurrent.locks.StampedLock;
 
 public class Rescue {
   //救援编号
@@ -41,9 +43,7 @@ public class Rescue {
   //救助状态
   private String rState;
   //申请救援时间
-  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-  @JsonSerialize(using = LocalDateTimeSerializer.class)
-  private LocalDateTime rTime;
+  private Timestamp rTime;
   //救助人既往病史
   @Size(max = 255, message = "既往病史过长！", groups = {Regist.class})
   private String pastMedicalHistory;
@@ -136,11 +136,11 @@ public class Rescue {
   }
 
 
-  public LocalDateTime getrTime() {
+  public Timestamp getrTime() {
     return rTime;
   }
 
-  public void setrTime(LocalDateTime rTime) {
+  public void setrTime(Timestamp rTime) {
     this.rTime = rTime;
   }
 

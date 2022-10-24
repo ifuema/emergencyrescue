@@ -1,7 +1,7 @@
 package team.ghjly.emergencyrescue.config.interceptor;
 
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONWriter;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import team.ghjly.emergencyrescue.vo.ResultCode;
@@ -13,16 +13,26 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Component
 public class UserInterceptor implements HandlerInterceptor {
     @Resource
     private UserService userService;
-    private final String stateInvalidJson = JSON.toJSONString(new ResultVO<>(ResultCode.PERMISSION_REGECT, "登录已过期！"), JSONWriter.Feature.WriteMapNullValue);
-    private final String notLoginJson = JSON.toJSONString(new ResultVO<>(ResultCode.PERMISSION_REGECT, "未登录！"), JSONWriter.Feature.WriteMapNullValue);
+    private ObjectMapper objectMapper = new ObjectMapper();
+    private String stateInvalidJson = "";
+    private String notLoginJson = "";
+
+    {
+        try {
+            stateInvalidJson = objectMapper.writeValueAsString(new ResultVO<>(ResultCode.PERMISSION_REGECT, "登录已过期！"));
+            notLoginJson = objectMapper.writeValueAsString(new ResultVO<>(ResultCode.PERMISSION_REGECT, "未登录！"));
+        } catch (JsonProcessingException e) {
+        }
+    }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             return true;
         }
@@ -30,12 +40,18 @@ public class UserInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            response.getWriter().write(notLoginJson);
+            try {
+                response.getWriter().write(notLoginJson);
+            } catch (IOException e) {
+            }
             return false;
         } else {
             boolean result = userService.checkUserByUAccountAndUPassword(user);
             if (!result) {
-                response.getWriter().write(stateInvalidJson);
+                try {
+                    response.getWriter().write(stateInvalidJson);
+                } catch (IOException e) {
+                }
                 return false;
             } else {
                 return true;
