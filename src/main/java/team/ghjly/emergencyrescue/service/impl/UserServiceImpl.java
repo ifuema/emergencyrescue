@@ -6,6 +6,7 @@ import team.ghjly.emergencyrescue.mapper.UserMapper;
 import team.ghjly.emergencyrescue.service.UserService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -72,5 +73,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByUId(Integer uId) {
         return userMapper.selectUserByUId(uId);
+    }
+
+    @Override
+    public List<User> getUserListPageByUser(int pageSize, Integer pageNum, User user) {
+        Integer startIndex = (pageNum - 1) * pageSize;
+        return userMapper.selectUserListPageByUser(pageSize, startIndex, user);
     }
 }

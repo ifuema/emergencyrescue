@@ -32,14 +32,14 @@ public class TestController {
 //        return integer;
 //    }
 //
-    @PostMapping("/login1")
-    public LocalDateTime login(@RequestBody Rescue rescue) {
-        return rescue.getrTime();
-//        BigDecimal cPrice = commodity.getCPrice();
-//        cPrice.setScale(2,BigDecimal.ROUND_DOWN);
-//        System.out.println(cPrice);
-//        return commodity;
-    }
+//    @PostMapping("/login1")
+//    public Rescue login(@RequestBody Rescue rescue) {
+//        return rescue;
+////        BigDecimal cPrice = commodity.getCPrice();
+////        cPrice.setScale(2,BigDecimal.ROUND_DOWN);
+////        System.out.println(cPrice);
+////        return commodity;
+//    }
 
 //public static void main(String[] args) {
 ////    System.out.println(System.currentTimeMillis());

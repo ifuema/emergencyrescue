@@ -6,6 +6,7 @@ import team.ghjly.emergencyrescue.mapper.RescueMapper;
 import team.ghjly.emergencyrescue.service.RescueService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class RescueServiceImpl implements RescueService {
@@ -24,5 +25,10 @@ public class RescueServiceImpl implements RescueService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public List<Rescue> getRescueListByUId(Integer uId) {
+        return rescueMapper.selectRescueListByUId(uId);
     }
 }

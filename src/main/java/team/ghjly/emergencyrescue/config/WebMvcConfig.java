@@ -1,5 +1,6 @@
 package team.ghjly.emergencyrescue.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -28,5 +29,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Bean
     public DateTimeFormatter dateTimeFormatter() {
         return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 }

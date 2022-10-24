@@ -1,6 +1,10 @@
 package team.ghjly.emergencyrescue.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import team.ghjly.emergencyrescue.entity.groups.Regist;
 
 import javax.validation.constraints.*;
@@ -37,6 +41,8 @@ public class Rescue {
   //救助状态
   private String rState;
   //申请救援时间
+  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+  @JsonSerialize(using = LocalDateTimeSerializer.class)
   private LocalDateTime rTime;
   //救助人既往病史
   @Size(max = 255, message = "既往病史过长！", groups = {Regist.class})
@@ -130,7 +136,6 @@ public class Rescue {
   }
 
 
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   public LocalDateTime getrTime() {
     return rTime;
   }

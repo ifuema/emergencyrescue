@@ -13,6 +13,7 @@ import team.ghjly.emergencyrescue.vo.ResultVO;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user/vip")
@@ -56,5 +57,13 @@ public class UserVipController {
         } else {
             return applyFailed;
         }
+    }
+
+    @GetMapping("/rescue")
+    public ResultVO<List<Rescue>> myRescue(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        List<Rescue> dataRescueList = rescueService.getRescueListByUId(user.getuId());
+        return new ResultVO<>(dataRescueList);
     }
 }

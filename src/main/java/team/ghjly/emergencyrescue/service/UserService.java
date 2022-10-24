@@ -2,6 +2,8 @@ package team.ghjly.emergencyrescue.service;
 
 import team.ghjly.emergencyrescue.entity.User;
 
+import java.util.List;
+
 public interface UserService {
     /**
      * 根据账号文本判断是否已存在用户
@@ -37,4 +39,6 @@ public interface UserService {
      * @return
      */
     User getUserByUId(Integer uId);
+
+    List<User> getUserListPageByUser(int pageSize, Integer pageNum, User user);
 }

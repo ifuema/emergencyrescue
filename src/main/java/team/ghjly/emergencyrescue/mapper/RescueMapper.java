@@ -3,7 +3,10 @@ package team.ghjly.emergencyrescue.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 import team.ghjly.emergencyrescue.entity.Rescue;
+
+import java.util.List;
 
 @Mapper
 public interface RescueMapper {
@@ -18,4 +21,7 @@ public interface RescueMapper {
             "'已申请', now(), #{pastMedicalHistory}, #{allergyHistory}, #{rDescribe})")
     @Options(useGeneratedKeys = true, keyProperty = "rId", keyColumn = "r_id")
     int insertRescue(Rescue rescue);
+
+    @Select("SELECT * FROM rescue WHERE u_id = #{uId}")
+    List<Rescue> selectRescueListByUId(Integer uId);
 }

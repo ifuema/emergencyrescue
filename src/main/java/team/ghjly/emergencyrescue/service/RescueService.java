@@ -2,6 +2,8 @@ package team.ghjly.emergencyrescue.service;
 
 import team.ghjly.emergencyrescue.entity.Rescue;
 
+import java.util.List;
+
 public interface RescueService {
     /**
      * 新增救援
@@ -9,4 +11,6 @@ public interface RescueService {
      * @return
      */
     boolean saveRescue(Rescue rescue);
+
+    List<Rescue> getRescueListByUId(Integer uId);
 }

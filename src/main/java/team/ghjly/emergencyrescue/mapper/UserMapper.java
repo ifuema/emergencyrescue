@@ -1,10 +1,10 @@
 package team.ghjly.emergencyrescue.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import team.ghjly.emergencyrescue.entity.User;
+import team.ghjly.emergencyrescue.mapper.sql.UserMapperSqlProvider;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -49,4 +49,7 @@ public interface UserMapper {
      */
     @Select("SELECT u_id, u_name, u_account, u_telephone, u_email FROM user WHERE u_id = #{uId}")
     User selectUserByUId(Integer uId);
+
+    @SelectProvider(type = UserMapperSqlProvider.class, method = "selectUserListPageByUserSql")
+    List<User> selectUserListPageByUser(int pageSize, Integer startIndex, User user);
 }
