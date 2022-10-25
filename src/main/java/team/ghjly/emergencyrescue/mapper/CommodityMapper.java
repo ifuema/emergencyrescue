@@ -20,6 +20,13 @@ public interface CommodityMapper {
             "ON knowledge.k_id = knowledge_commodity.k_id WHERE knowledge.k_id = #{kId}")
     List<Commodity> selectCommodityListByKId(Integer kId);
 
+    /**
+     * 根据过滤商品信息分页查询商品列表
+     * @param pageSize
+     * @param startIndex
+     * @param commodity
+     * @return
+     */
     @SelectProvider(type = CommodityMapperSqlProvider.class, method = "selectCommodityListPageByCommoditySql")
     List<Commodity> selectCommodityListPageByCommodity(int pageSize, Integer startIndex, Commodity commodity);
 }

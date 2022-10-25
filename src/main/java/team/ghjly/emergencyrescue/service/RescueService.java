@@ -12,5 +12,12 @@ public interface RescueService {
      */
     boolean saveRescue(Rescue rescue);
 
+    /**
+     * 根据用户id文本获取救援列表
+     * @param uId
+     * @return
+     */
     List<Rescue> getRescueListByUId(Integer uId);
+
+    List<Rescue> getRescueListPageByRescue(int pageSize, Integer pageNum, Rescue rescue);
 }

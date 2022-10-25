@@ -20,6 +20,12 @@ public class CommodityController {
     private int pageSize = 5;
     private final ResultVO<?> noData = new ResultVO<>(ResultCode.VALIDATE_FAILED, "当前页不存在数据！");
 
+    /**
+     *分页获取商品
+     * @param pageNum
+     * @param commodity
+     * @return
+     */
     @GetMapping("/page/{pageNum}")
     public ResultVO<?> page(@PathVariable Integer pageNum, Commodity commodity) {
         List<Commodity> dataCommodityList = commodityService.getCommodityListPageByCommodity(pageSize, pageNum, commodity);

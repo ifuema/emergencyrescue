@@ -1,5 +1,6 @@
 package team.ghjly.emergencyrescue.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectProvider;
 import team.ghjly.emergencyrescue.entity.Team;
@@ -18,4 +19,12 @@ public interface TeamMapper {
      */
     @SelectProvider(type = TeamMapperSqlProvider.class, method = "selectTeamPublicListPageByTeamSql")
     List<Team> selectTeamPublicListPageByTeam(int pageSize, Integer startIndex, Team team);
+
+    /**
+     * 根据tid文本删除救援队
+     * @param tId
+     * @return
+     */
+    @Delete("DELETE FROM team WHERE t_id = #{tId}")
+    Integer deleteTeamByTId(Integer tId);
 }

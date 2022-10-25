@@ -22,7 +22,7 @@ public class AdminController {
     private AdminService adminService;
     private final ResultVO<?> success = new ResultVO<>();
     private final ResultVO<?> accountNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号不存在！");
-    private final ResultVO<?> accountAndPasswordError = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号密码错误！");
+    private final ResultVO<?> accountOrPasswordError = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号或密码错误！");
 
     /**
      * 登录请求
@@ -45,7 +45,7 @@ public class AdminController {
                 request.getSession().setAttribute("admin", dataAdmin);
                 return success;
             } else {
-                return accountAndPasswordError;
+                return accountOrPasswordError;
             }
         }
     }

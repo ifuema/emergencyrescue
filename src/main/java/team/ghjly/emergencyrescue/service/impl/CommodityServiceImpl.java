@@ -23,6 +23,13 @@ public class CommodityServiceImpl implements CommodityService {
         return commodityMapper.selectCommodityListByKId(kId);
     }
 
+    /**
+     * 根据过滤商品信息分页获取商品列表
+     * @param pageSize
+     * @param pageNum
+     * @param commodity
+     * @return
+     */
     @Override
     public List<Commodity> getCommodityListPageByCommodity(int pageSize, Integer pageNum, Commodity commodity) {
         Integer startIndex = (pageNum - 1) * pageSize;

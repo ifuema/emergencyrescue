@@ -22,7 +22,7 @@ public class UserController {
     private final ResultVO<?> accountNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号不存在！");
     private final ResultVO<?> accountExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号已存在！");
     private final ResultVO<?> registFailed = new ResultVO<>(ResultCode.FAILED, "注册失败！");
-    private final ResultVO<?> accountAndPasswordError = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号密码错误！");
+    private final ResultVO<?> accountOrPasswordError = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号或密码错误！");
 
     /**
      * 登录请求
@@ -45,7 +45,7 @@ public class UserController {
                 request.getSession().setAttribute("user", dataUser);
                 return success;
             } else {
-                return accountAndPasswordError;
+                return accountOrPasswordError;
             }
         }
     }

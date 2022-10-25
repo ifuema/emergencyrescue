@@ -40,5 +40,12 @@ public interface UserService {
      */
     User getUserByUId(Integer uId);
 
+    /**
+     * 根据过滤用户信息分页获取用户列表
+     * @param pageSize
+     * @param pageNum
+     * @param user
+     * @return
+     */
     List<User> getUserListPageByUser(int pageSize, Integer pageNum, User user);
 }

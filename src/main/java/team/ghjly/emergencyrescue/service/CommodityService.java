@@ -12,5 +12,12 @@ public interface CommodityService {
      */
     List<Commodity> getCommodityListByKId(Integer kId);
 
+    /**
+     * 根据过滤商品信息分页获取商品列表
+     * @param pageSize
+     * @param pageNum
+     * @param commodity
+     * @return
+     */
     List<Commodity> getCommodityListPageByCommodity(int pageSize, Integer pageNum, Commodity commodity);
 }

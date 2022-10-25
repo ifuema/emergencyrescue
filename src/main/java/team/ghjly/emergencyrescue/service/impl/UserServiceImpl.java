@@ -75,6 +75,13 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectUserByUId(uId);
     }
 
+    /**
+     * 根据过滤用户信息分页获取用户列表
+     * @param pageSize
+     * @param pageNum
+     * @param user
+     * @return
+     */
     @Override
     public List<User> getUserListPageByUser(int pageSize, Integer pageNum, User user) {
         Integer startIndex = (pageNum - 1) * pageSize;

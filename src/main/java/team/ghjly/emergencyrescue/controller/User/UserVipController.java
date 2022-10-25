@@ -59,6 +59,11 @@ public class UserVipController {
         }
     }
 
+    /**
+     * 获取已登录用户救援信息列表
+     * @param request
+     * @return
+     */
     @GetMapping("/rescue")
     public ResultVO<List<Rescue>> myRescue(HttpServletRequest request) {
         HttpSession session = request.getSession();

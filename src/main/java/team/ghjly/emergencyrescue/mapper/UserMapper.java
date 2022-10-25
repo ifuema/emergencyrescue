@@ -16,7 +16,7 @@ public interface UserMapper {
     @Insert("INSERT INTO user (u_name, u_account, u_password, u_telephone, u_email) " +
             "VALUES (#{uName}, #{uAccount}, #{uPassword}, #{uTelephone}, #{uEmail})")
     @Options(useGeneratedKeys = true, keyProperty = "uId", keyColumn = "u_id")
-    int insertUser(User user);
+    Integer insertUser(User user);
 
     /**
      * 根据账号文本查询用户隐私信息
@@ -50,6 +50,13 @@ public interface UserMapper {
     @Select("SELECT u_id, u_name, u_account, u_telephone, u_email FROM user WHERE u_id = #{uId}")
     User selectUserByUId(Integer uId);
 
+    /**
+     * 根据过滤用户信息分页查询用户列表
+     * @param pageSize
+     * @param startIndex
+     * @param user
+     * @return
+     */
     @SelectProvider(type = UserMapperSqlProvider.class, method = "selectUserListPageByUserSql")
     List<User> selectUserListPageByUser(int pageSize, Integer startIndex, User user);
 }

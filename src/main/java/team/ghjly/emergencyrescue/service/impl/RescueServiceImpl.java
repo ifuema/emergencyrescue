@@ -30,8 +30,19 @@ public class RescueServiceImpl implements RescueService {
         }
     }
 
+    /**
+     * 根据用户id文本获取救援列表
+     * @param uId
+     * @return
+     */
     @Override
     public List<Rescue> getRescueListByUId(Integer uId) {
         return rescueMapper.selectRescueListByUId(uId);
+    }
+
+    @Override
+    public List<Rescue> getRescueListPageByRescue(int pageSize, Integer pageNum, Rescue rescue) {
+        Integer startIndex = (pageNum - 1) * pageSize;
+        return rescueMapper.selectRescueListPageByRescue(pageSize, startIndex, rescue);
     }
 }

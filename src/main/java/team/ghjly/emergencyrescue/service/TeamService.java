@@ -13,4 +13,11 @@ public interface TeamService {
      * @return
      */
     List<Team> getTeamPublicListPageByTeam(int pageSize, Integer pageNum, Team team);
+
+    /**
+     * 根据tid文本移除救援队
+     * @param tId
+     * @return
+     */
+    boolean removeTeamByTId(Integer tId);
 }

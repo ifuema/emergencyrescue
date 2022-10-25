@@ -1,10 +1,8 @@
 package team.ghjly.emergencyrescue.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import team.ghjly.emergencyrescue.entity.Rescue;
+import team.ghjly.emergencyrescue.mapper.sql.RescueMapperSqlProvider;
 
 import java.util.List;
 
@@ -20,8 +18,16 @@ public interface RescueMapper {
             "(#{uId}, #{rName}, #{rAge}, #{rGender}, #{rAddress}, #{rTelephone}, " +
             "#{rState}, #{rTime}, #{pastMedicalHistory}, #{allergyHistory}, #{rDescribe})")
     @Options(useGeneratedKeys = true, keyProperty = "rId", keyColumn = "r_id")
-    int insertRescue(Rescue rescue);
+    Integer insertRescue(Rescue rescue);
 
+    /**
+     * 根据用户id文本查询救援列表
+     * @param uId
+     * @return
+     */
     @Select("SELECT * FROM rescue WHERE u_id = #{uId}")
     List<Rescue> selectRescueListByUId(Integer uId);
+
+    @SelectProvider(type = RescueMapperSqlProvider.class, method = "selectRescueListPageByRescueSql")
+    List<Rescue> selectRescueListPageByRescue(int pageSize, Integer startIndex, Rescue rescue);
 }

@@ -25,4 +25,18 @@ public class TeamServiceImpl implements TeamService {
         Integer startIndex = (pageNum - 1) * pageSize;
         return teamMapper.selectTeamPublicListPageByTeam(pageSize, startIndex, team);
     }
+
+    /**
+     * 根据tid文本移除救援队
+     * @param tId
+     * @return
+     */
+    @Override
+    public boolean removeTeamByTId(Integer tId) {
+        if (teamMapper.deleteTeamByTId(tId) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
