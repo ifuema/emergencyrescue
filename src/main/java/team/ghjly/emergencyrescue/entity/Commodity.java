@@ -3,8 +3,6 @@ package team.ghjly.emergencyrescue.entity;
 public class Commodity {
   //商品编号
   private Integer cId;
-  //库存数量
-  private Integer cNum;
   //商品图片
   private String cImg;
   //商品价格
@@ -13,6 +11,8 @@ public class Commodity {
   private String cName;
   //商品简介
   private String cIntroduce;
+  //商品链接
+  private String cUrl;
 
 
   public Integer getcId() {
@@ -21,15 +21,6 @@ public class Commodity {
 
   public void setcId(Integer cId) {
     this.cId = cId;
-  }
-
-
-  public Integer getcNum() {
-    return cNum;
-  }
-
-  public void setcNum(Integer cNum) {
-    this.cNum = cNum;
   }
 
 
@@ -69,15 +60,24 @@ public class Commodity {
   }
 
 
+  public String getcUrl() {
+    return cUrl;
+  }
+
+  public void setcUrl(String cUrl) {
+    this.cUrl = cUrl;
+  }
+
+
   @Override
   public String toString() {
     return "Commodity{" +
             "cId=" + cId +
-            ", cNum=" + cNum +
             ", cImg='" + cImg + '\'' +
-            ", cPrice='" + cPrice + '\'' +
+            ", cPrice=" + cPrice +
             ", cName='" + cName + '\'' +
             ", cIntroduce='" + cIntroduce + '\'' +
+            ", cUrl='" + cUrl + '\'' +
             '}';
   }
 }

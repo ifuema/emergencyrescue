@@ -10,7 +10,7 @@ public interface CommodityService {
      * @param kId
      * @return
      */
-    List<Commodity> getCommodityListByKId(Integer kId);
+    List<Commodity> getCommodityListByKnowledgeKId(Integer kId);
 
     /**
      * 根据过滤商品信息分页获取商品列表
@@ -20,4 +20,6 @@ public interface CommodityService {
      * @return
      */
     List<Commodity> getCommodityListPageByCommodity(int pageSize, Integer pageNum, Commodity commodity);
+
+    Integer getCIdByCName(String cName);
 }

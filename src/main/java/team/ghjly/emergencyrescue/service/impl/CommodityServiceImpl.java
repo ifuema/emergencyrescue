@@ -19,8 +19,8 @@ public class CommodityServiceImpl implements CommodityService {
      * @return
      */
     @Override
-    public List<Commodity> getCommodityListByKId(Integer kId) {
-        return commodityMapper.selectCommodityListByKId(kId);
+    public List<Commodity> getCommodityListByKnowledgeKId(Integer kId) {
+        return commodityMapper.selectCommodityListByKnowledgeKId(kId);
     }
 
     /**
@@ -34,5 +34,10 @@ public class CommodityServiceImpl implements CommodityService {
     public List<Commodity> getCommodityListPageByCommodity(int pageSize, Integer pageNum, Commodity commodity) {
         Integer startIndex = (pageNum - 1) * pageSize;
         return commodityMapper.selectCommodityListPageByCommodity(pageSize, startIndex, commodity);
+    }
+
+    @Override
+    public Integer getCIdByCName(String cName) {
+        return commodityMapper.selectCIdByCName(cName);
     }
 }

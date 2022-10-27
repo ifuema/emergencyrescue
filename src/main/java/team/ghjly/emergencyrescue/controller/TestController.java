@@ -9,6 +9,7 @@ import team.ghjly.emergencyrescue.entity.Rescue;
 import team.ghjly.emergencyrescue.entity.User;
 import team.ghjly.emergencyrescue.entity.groups.Login;
 import team.ghjly.emergencyrescue.entity.groups.Regist;
+import team.ghjly.emergencyrescue.service.CommodityService;
 import team.ghjly.emergencyrescue.service.UserService;
 import team.ghjly.emergencyrescue.vo.ResultVO;
 
@@ -25,12 +26,15 @@ import java.time.LocalDateTime;
 public class TestController {
     @Resource
     private UserService userService;
+    @Resource
+    private CommodityService commodityService;
 
 
-//    @GetMapping("/a")
-//    public Integer test( @PositiveOrZero(message = "电话格式不正确！")  Integer integer) {
-//        return integer;
-//    }
+    @GetMapping("/a")
+    public Integer test() {
+        System.out.println(commodityService.getCIdByCName("asgds"));
+        return commodityService.getCIdByCName("asgds");
+    }
 //
 //    @PostMapping("/login1")
 //    public Rescue login(@RequestBody Rescue rescue) {

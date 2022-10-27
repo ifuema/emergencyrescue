@@ -28,7 +28,7 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         Integer startIndex = (pageNum - 1) * pageSize;
         List<Knowledge> dataKnowledgeList = knowledgeMapper.selectKnowledgeListPageByKnowledge(pageSize, startIndex, knowledge);
         for (Knowledge dataknowledge : dataKnowledgeList) {
-            dataknowledge.setCommodityList(commodityService.getCommodityListByKId(dataknowledge.getkId()));
+            dataknowledge.setCommodityList(commodityService.getCommodityListByKnowledgeKId(dataknowledge.getkId()));
         }
         return dataKnowledgeList;
     }
