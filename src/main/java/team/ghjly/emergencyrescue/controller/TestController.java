@@ -30,11 +30,11 @@ public class TestController {
     private CommodityService commodityService;
 
 
-    @GetMapping("/a")
-    public Integer test() {
-        System.out.println(commodityService.getCIdByCName("asgds"));
-        return commodityService.getCIdByCName("asgds");
-    }
+//    @GetMapping("/a")
+//    public Integer test() {
+//        System.out.println(commodityService.getCIdByCName("asgds"));
+//        return commodityService.getCIdByCName("asgds");
+//    }
 //
 //    @PostMapping("/login1")
 //    public Rescue login(@RequestBody Rescue rescue) {

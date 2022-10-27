@@ -36,6 +36,11 @@ public class CommodityServiceImpl implements CommodityService {
         return commodityMapper.selectCommodityListPageByCommodity(pageSize, startIndex, commodity);
     }
 
+    /**
+     * 根据商品名称文本获取商品id
+     * @param cName
+     * @return
+     */
     @Override
     public Integer getCIdByCName(String cName) {
         return commodityMapper.selectCIdByCName(cName);

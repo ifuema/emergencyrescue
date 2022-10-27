@@ -19,5 +19,12 @@ public interface RescueService {
      */
     List<Rescue> getRescueListByUId(Integer uId);
 
+    /**
+     * 根据过滤救援信息分页获取救援列表
+     * @param pageSize
+     * @param pageNum
+     * @param rescue
+     * @return
+     */
     List<Rescue> getRescueListPageByRescue(int pageSize, Integer pageNum, Rescue rescue);
 }

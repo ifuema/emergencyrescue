@@ -2,7 +2,6 @@ package team.ghjly.emergencyrescue.mapper;
 
 import org.apache.ibatis.annotations.*;
 import team.ghjly.emergencyrescue.entity.Commodity;
-import team.ghjly.emergencyrescue.entity.Order;
 import team.ghjly.emergencyrescue.mapper.sql.CommodityMapperSqlProvider;
 
 import java.util.List;
@@ -29,6 +28,11 @@ public interface CommodityMapper {
     @SelectProvider(type = CommodityMapperSqlProvider.class, method = "selectCommodityListPageByCommoditySql")
     List<Commodity> selectCommodityListPageByCommodity(int pageSize, Integer startIndex, Commodity commodity);
 
+    /**
+     * 根据商品名称文本查询商品id
+     * @param cName
+     * @return
+     */
     @Select("SELECT c_id FROM commodity WHERE c_name = #{cName}")
     Integer selectCIdByCName(String cName);
 }

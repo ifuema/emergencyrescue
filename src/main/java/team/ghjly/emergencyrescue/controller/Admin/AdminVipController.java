@@ -2,7 +2,6 @@ package team.ghjly.emergencyrescue.controller.Admin;
 
 import org.springframework.web.bind.annotation.*;
 import team.ghjly.emergencyrescue.entity.Rescue;
-import team.ghjly.emergencyrescue.entity.Team;
 import team.ghjly.emergencyrescue.entity.User;
 import team.ghjly.emergencyrescue.service.RescueService;
 import team.ghjly.emergencyrescue.service.TeamService;
@@ -26,6 +25,7 @@ public class AdminVipController {
     private final ResultVO<?> success = new ResultVO<>();
     private final ResultVO<?> noData = new ResultVO<>(ResultCode.VALIDATE_FAILED, "当前页不存在数据！");
     private final ResultVO<?> deleteFailed = new ResultVO<>(ResultCode.FAILED, "删除失败！");
+
     /**
      * 分页获取用户
      * @param pageNum
@@ -56,6 +56,12 @@ public class AdminVipController {
         }
     }
 
+    /**
+     * 分页获取救援申请
+     * @param pageNum
+     * @param rescue
+     * @return
+     */
     @GetMapping("/rescue/page/{pageNum}")
     public ResultVO<?> rescuePage(@PathVariable Integer pageNum, Rescue rescue) {
         List<Rescue> dataRescueList = rescueService.getRescueListPageByRescue(pageSize, pageNum, rescue);

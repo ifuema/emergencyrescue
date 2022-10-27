@@ -7,12 +7,18 @@ import team.ghjly.emergencyrescue.service.OrderService;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
     @Resource
     OrderMapper orderMapper;
 
+    /**
+     * 新增订单
+     * @param order
+     * @return
+     */
     @Override
     public boolean saveOrder(Order order) {
         order.setoTime(new Timestamp(System.currentTimeMillis()));
@@ -24,6 +30,11 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    /**
+     * 根据订单号文本判断是否已存在订单
+     * @param oTrade
+     * @return
+     */
     @Override
     public boolean checkOrderByOTrade(String oTrade) {
         Integer dataOId = orderMapper.selectOIdByOTrade(oTrade);
@@ -31,5 +42,15 @@ public class OrderServiceImpl implements OrderService {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 根据用户id文本获取订单列表
+     * @param uId
+     * @return
+     */
+    @Override
+    public List<Order> getOrderListByUId(Integer uId) {
+        return orderMapper.selectOrderListByUId(uId);
     }
 }

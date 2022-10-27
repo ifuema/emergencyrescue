@@ -98,6 +98,25 @@ public class UserVipController {
         return new ResultVO<>(dataRescueList);
     }
 
+    /**
+     * 获取已登录用户订单信息列表
+     * @param request
+     * @return
+     */
+    @GetMapping("/order")
+    public ResultVO<List<Order>> myOrder(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        List<Order> dataOrderList = orderService.getOrderListByUId(user.getuId());
+        return new ResultVO<>(dataOrderList);
+    }
+
+    /**
+     * 订单注册
+     * @param order
+     * @param request
+     * @return
+     */
     @PostMapping("/order")
     public ResultVO<?> buy(@RequestBody @Validated({Regist.class}) Order order, HttpServletRequest request) {
         if (!orderService.checkOrderByOTrade(order.getoTrade())) {

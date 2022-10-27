@@ -16,6 +16,12 @@ public class HttpRequestUtil {
     @Resource
     ObjectMapper objectMapper;
 
+    /**
+     * 发起get请求
+     * @param url
+     * @param map
+     * @return
+     */
     public JsonNode getRequest(String url, Map<String, String> map) {
         if (url == null) {
             return null;

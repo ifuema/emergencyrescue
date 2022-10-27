@@ -21,5 +21,10 @@ public interface CommodityService {
      */
     List<Commodity> getCommodityListPageByCommodity(int pageSize, Integer pageNum, Commodity commodity);
 
+    /**
+     * 根据商品名称文本获取商品id
+     * @param cName
+     * @return
+     */
     Integer getCIdByCName(String cName);
 }

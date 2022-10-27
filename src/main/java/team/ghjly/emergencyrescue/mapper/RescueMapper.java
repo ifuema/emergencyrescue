@@ -28,6 +28,13 @@ public interface RescueMapper {
     @Select("SELECT * FROM rescue WHERE u_id = #{uId}")
     List<Rescue> selectRescueListByUId(Integer uId);
 
+    /**
+     * 根据过滤救援信息分页查询救援列表
+     * @param pageSize
+     * @param startIndex
+     * @param rescue
+     * @return
+     */
     @SelectProvider(type = RescueMapperSqlProvider.class, method = "selectRescueListPageByRescueSql")
     List<Rescue> selectRescueListPageByRescue(int pageSize, Integer startIndex, Rescue rescue);
 }
