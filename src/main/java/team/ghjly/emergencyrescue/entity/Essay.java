@@ -1,15 +1,26 @@
 package team.ghjly.emergencyrescue.entity;
 
+import team.ghjly.emergencyrescue.entity.groups.Regist;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Essay {
   //文章编号
   private Integer eId;
   //文章标题
+  @NotBlank(message = "标题不能为空！", groups = {Regist.class})
+  @Size(max = 32, message = "标题过长！", groups = {Regist.class})
   private String eTitle;
   //文章图片
+  @NotBlank(message = "图片不能为空！", groups = {Regist.class})
   private String eImg;
   //文章内容
+  @NotBlank(message = "正文不能为空！", groups = {Regist.class})
   private String eBody;
   //文章类型
+  @NotNull(message = "类型不能为空！", groups = {Regist.class})
   private Integer eType;
 
 

@@ -2,6 +2,7 @@ package team.ghjly.emergencyrescue.mapper;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import team.ghjly.emergencyrescue.entity.Team;
 import team.ghjly.emergencyrescue.mapper.sql.TeamMapperSqlProvider;
@@ -27,4 +28,7 @@ public interface TeamMapper {
      */
     @Delete("DELETE FROM team WHERE t_id = #{tId}")
     Integer deleteTeamByTId(Integer tId);
+
+    @Select("SELECT t_id FROM team WHERE t_id = #{tId}")
+    Integer selectTIdByTId(Integer tId);
 }

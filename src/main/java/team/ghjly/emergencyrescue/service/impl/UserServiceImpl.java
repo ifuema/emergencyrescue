@@ -20,11 +20,12 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean checkUserByUAccount(Integer uAccount) {
-        Integer dataUId = userMapper.selectUIdByAccount(uAccount);
+        Integer dataUId = userMapper.selectUIdByUAccount(uAccount);
         if (dataUId == null) {
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     /**
@@ -58,11 +59,12 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean checkUserByUAccountAndUPassword(User user) {
-        Integer dataUId = userMapper.selectUIdByAccountAndPassword(user);
+        Integer dataUId = userMapper.selectUIdByUAccountAndUPassword(user);
         if (dataUId == null) {
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     /**
@@ -86,5 +88,24 @@ public class UserServiceImpl implements UserService {
     public List<User> getUserListPageByUser(int pageSize, Integer pageNum, User user) {
         Integer startIndex = (pageNum - 1) * pageSize;
         return userMapper.selectUserListPageByUser(pageSize, startIndex, user);
+    }
+
+    @Override
+    public boolean removeUserByUId(Integer uId) {
+        if (userMapper.deleteUserByUId(uId) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean checkUserByUId(Integer uId) {
+        Integer dataTId = userMapper.selectUIdByUId(uId);
+        if (dataTId == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

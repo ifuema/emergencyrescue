@@ -2,10 +2,7 @@ package team.ghjly.emergencyrescue.controller.Admin;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team.ghjly.emergencyrescue.entity.Admin;
 import team.ghjly.emergencyrescue.vo.ResultCode;
 import team.ghjly.emergencyrescue.entity.groups.Login;
@@ -48,5 +45,16 @@ public class AdminController {
                 return accountOrPasswordError;
             }
         }
+    }
+
+    /**
+     * 登出
+     * @param request
+     * @return
+     */
+    @DeleteMapping("/session")
+    public ResultVO<?> logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("admin");
+        return success;
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import team.ghjly.emergencyrescue.config.interceptor.AdminInterceptor;
 import team.ghjly.emergencyrescue.config.interceptor.UserInterceptor;
 
 import javax.annotation.Resource;
@@ -16,6 +17,8 @@ import java.time.format.DateTimeFormatter;
 public class WebMvcConfig implements WebMvcConfigurer {
     @Resource
     private UserInterceptor userInterceptor;
+    @Resource
+    private AdminInterceptor adminInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -25,6 +28,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(userInterceptor).addPathPatterns("/user/vip/**");
+        registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/vip/**");
     }
 
     @Bean

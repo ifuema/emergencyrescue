@@ -32,7 +32,7 @@ public interface UserMapper {
      * @return
      */
     @Select("SELECT u_id FROM user WHERE u_account = #{uAccount}")
-    Integer selectUIdByAccount(Integer uAccount);
+    Integer selectUIdByUAccount(Integer uAccount);
 
     /**
      * 根据账号密码查询用户id
@@ -40,7 +40,7 @@ public interface UserMapper {
      * @return
      */
     @Select("SELECT u_id FROM user WHERE u_account = #{uAccount} AND u_password = #{uPassword}")
-    Integer selectUIdByAccountAndPassword(User user);
+    Integer selectUIdByUAccountAndUPassword(User user);
 
     /**
      * 根据id文本查询用户信息
@@ -59,4 +59,10 @@ public interface UserMapper {
      */
     @SelectProvider(type = UserMapperSqlProvider.class, method = "selectUserListPageByUserSql")
     List<User> selectUserListPageByUser(int pageSize, Integer startIndex, User user);
+
+    @Delete("DELETE FROM user WHERE u_id = #{uId}")
+    Integer deleteUserByUId(Integer uId);
+
+    @Select("SELECT u_id FROM user WHERE u_id = #{uId}")
+    Integer selectUIdByUId(Integer uId);
 }

@@ -35,4 +35,32 @@ public class EssayServiceImpl implements EssayService {
     public Essay getEssayByEId(Integer eId) {
         return essayMapper.selectEssayByEId(eId);
     }
+
+    @Override
+    public boolean saveEssay(Essay essay) {
+        if (essayMapper.insertEssay(essay) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean checkEssayByEId(Integer eId) {
+        Integer dataEId = essayMapper.selectEIdByEId(eId);
+        if (dataEId == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean removeEssayByEId(Integer eId) {
+        if (essayMapper.deleteEssayByEId(eId) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -4,6 +4,7 @@ import team.ghjly.emergencyrescue.entity.groups.Regist;
 
 import javax.validation.constraints.*;
 import java.sql.Timestamp;
+import java.time.Instant;
 
 public class Rescue {
   //救援编号
@@ -36,7 +37,7 @@ public class Rescue {
   //救助状态
   private String rState;
   //申请救援时间
-  private Timestamp rTime;
+  private Instant rTime;
   //救助人既往病史
   @Size(max = 255, message = "既往病史过长！", groups = {Regist.class})
   private String pastMedicalHistory;
@@ -129,11 +130,11 @@ public class Rescue {
   }
 
 
-  public Timestamp getrTime() {
+  public Instant getrTime() {
     return rTime;
   }
 
-  public void setrTime(Timestamp rTime) {
+  public void setrTime(Instant rTime) {
     this.rTime = rTime;
   }
 

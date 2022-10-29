@@ -20,4 +20,6 @@ public interface TeamService {
      * @return
      */
     boolean removeTeamByTId(Integer tId);
+
+    boolean checkTeamByTId(Integer tId);
 }

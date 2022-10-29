@@ -9,4 +9,11 @@ public interface AdminService {
      * @return
      */
     Admin getAdminPrivateByAAccount(Integer aAccount);
+
+    /**
+     * 根据账号密码判断是否已存在管理员
+     * @param admin
+     * @return
+     */
+    boolean checkUserByAAccountAndAPassword(Admin admin);
 }

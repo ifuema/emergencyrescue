@@ -25,4 +25,13 @@ public interface OrderService {
      * @return
      */
     List<Order> getOrderListByUId(Integer uId);
+
+    /**
+     * 根据过滤订单信息分页获取订单列表
+     * @param pageSize
+     * @param pageNum
+     * @param order
+     * @return
+     */
+    List<Order> getROrderListPageByOrder(int pageSize, Integer pageNum, Order order);
 }

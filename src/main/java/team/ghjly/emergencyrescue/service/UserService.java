@@ -48,4 +48,8 @@ public interface UserService {
      * @return
      */
     List<User> getUserListPageByUser(int pageSize, Integer pageNum, User user);
+
+    boolean removeUserByUId(Integer uId);
+
+    boolean checkUserByUId(Integer uId);
 }

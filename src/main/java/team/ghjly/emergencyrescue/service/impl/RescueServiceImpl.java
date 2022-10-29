@@ -7,6 +7,7 @@ import team.ghjly.emergencyrescue.service.RescueService;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -21,7 +22,7 @@ public class RescueServiceImpl implements RescueService {
      */
     @Override
     public boolean saveRescue(Rescue rescue) {
-        rescue.setrTime(new Timestamp(System.currentTimeMillis()));
+        rescue.setrTime(Instant.now());
         rescue.setrState("已申请");
         if (rescueMapper.insertRescue(rescue) >= 1) {
             return true;

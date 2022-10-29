@@ -3,7 +3,7 @@ package team.ghjly.emergencyrescue.entity;
 import team.ghjly.emergencyrescue.entity.groups.Regist;
 
 import javax.validation.constraints.NotBlank;
-import java.sql.Timestamp;
+import java.time.Instant;
 
 public class Order {
   //订单编号
@@ -17,7 +17,7 @@ public class Order {
   //收件人姓名
   private String oName;
   //下单时间
-  private Timestamp oTime;
+  private Instant oTime;
   //订单状态
   private String oState;
   //收件联系电话
@@ -78,11 +78,11 @@ public class Order {
   }
 
 
-  public Timestamp getoTime() {
+  public Instant getoTime() {
     return oTime;
   }
 
-  public void setoTime(Timestamp oTime) {
+  public void setoTime(Instant oTime) {
     this.oTime = oTime;
   }
 

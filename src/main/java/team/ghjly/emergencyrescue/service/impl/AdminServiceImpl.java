@@ -21,4 +21,18 @@ public class AdminServiceImpl implements AdminService {
     public Admin getAdminPrivateByAAccount(Integer aAccount) {
         return adminMapper.selectAdminPrivateByUAccount(aAccount);
     }
+
+    /**
+     * 根据账号密码判断是否已存在管理员
+     * @param admin
+     * @return
+     */
+    @Override
+    public boolean checkUserByAAccountAndAPassword(Admin admin) {
+        Integer dataUId = adminMapper.selectAIdByAAccountAndAPassword(admin);
+        if (dataUId == null) {
+            return false;
+        }
+        return true;
+    }
 }

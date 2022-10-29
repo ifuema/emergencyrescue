@@ -13,4 +13,12 @@ public interface AdminMapper {
      */
     @Select("SELECT * FROM admin WHERE a_account = #{aAccount}")
     Admin selectAdminPrivateByUAccount(Integer aAccount);
+
+    /**
+     * 根据账号密码查询管理员id
+     * @param admin
+     * @return
+     */
+    @Select("SELECT a_id FROM admin WHERE a_account = #{aAccount} AND a_password = #{aPassword}")
+    Integer selectAIdByAAccountAndAPassword(Admin admin);
 }

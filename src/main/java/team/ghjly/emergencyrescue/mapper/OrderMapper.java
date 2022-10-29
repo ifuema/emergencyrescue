@@ -1,10 +1,8 @@
 package team.ghjly.emergencyrescue.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import team.ghjly.emergencyrescue.entity.Order;
+import team.ghjly.emergencyrescue.mapper.sql.OrderMapperSqlProvider;
 
 import java.util.List;
 
@@ -37,4 +35,14 @@ public interface OrderMapper {
      */
     @Select("SELECT * FROM `order` WHERE u_id = #{uId}")
     List<Order> selectOrderListByUId(Integer uId);
+
+    /**
+     * 根据过滤订单信息分页查询订单列表
+     * @param pageSize
+     * @param startIndex
+     * @param order
+     * @return
+     */
+    @SelectProvider(type = OrderMapperSqlProvider.class, method = "selectOrderListPageByOrderSql")
+    List<Order> selectOrderListPageByOrder(int pageSize, Integer startIndex, Order order);
 }

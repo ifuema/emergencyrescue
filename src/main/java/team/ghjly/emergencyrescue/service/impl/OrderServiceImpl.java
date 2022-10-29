@@ -7,6 +7,7 @@ import team.ghjly.emergencyrescue.service.OrderService;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -21,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public boolean saveOrder(Order order) {
-        order.setoTime(new Timestamp(System.currentTimeMillis()));
+        order.setoTime(Instant.now());
         order.setoState("已下单");
         if (orderMapper.insertOrder(order) >= 1) {
             return true;
@@ -52,5 +53,18 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getOrderListByUId(Integer uId) {
         return orderMapper.selectOrderListByUId(uId);
+    }
+
+    /**
+     * 根据过滤订单信息分页获取订单列表
+     * @param pageSize
+     * @param pageNum
+     * @param order
+     * @return
+     */
+    @Override
+    public List<Order> getROrderListPageByOrder(int pageSize, Integer pageNum, Order order) {
+        Integer startIndex = (pageNum - 1) * pageSize;
+        return orderMapper.selectOrderListPageByOrder(pageSize, startIndex, order);
     }
 }

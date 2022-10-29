@@ -39,4 +39,13 @@ public class TeamServiceImpl implements TeamService {
             return false;
         }
     }
+
+    @Override
+    public boolean checkTeamByTId(Integer tId) {
+        Integer dataTId = teamMapper.selectTIdByTId(tId);
+        if (dataTId == null) {
+            return false;
+        }
+        return true;
+    }
 }

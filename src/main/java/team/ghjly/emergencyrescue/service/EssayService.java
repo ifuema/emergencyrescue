@@ -20,4 +20,10 @@ public interface EssayService {
      * @return
      */
     Essay getEssayByEId(Integer eId);
+
+    boolean saveEssay(Essay essay);
+
+    boolean checkEssayByEId(Integer eId);
+
+    boolean removeEssayByEId(Integer eId);
 }
