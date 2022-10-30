@@ -27,4 +27,12 @@ public interface CommodityService {
      * @return
      */
     Integer getCIdByCName(String cName);
+
+    boolean checkCommodityByCName(String cName);
+
+    boolean saveCommodity(Commodity commodity);
+
+    boolean checkCommodityByCId(Integer cId);
+
+    boolean removeCommodityByCId(Integer cId);
 }

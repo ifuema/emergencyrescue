@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import team.ghjly.emergencyrescue.entity.Commodity;
+import team.ghjly.emergencyrescue.entity.Knowledge;
 import team.ghjly.emergencyrescue.entity.Rescue;
 import team.ghjly.emergencyrescue.entity.User;
 import team.ghjly.emergencyrescue.entity.groups.Login;
@@ -36,14 +37,14 @@ public class TestController {
 //        return commodityService.getCIdByCName("asgds");
 //    }
 //
-//    @PostMapping("/login1")
-//    public Rescue login(@RequestBody Rescue rescue) {
-//        return rescue;
-////        BigDecimal cPrice = commodity.getCPrice();
-////        cPrice.setScale(2,BigDecimal.ROUND_DOWN);
-////        System.out.println(cPrice);
-////        return commodity;
-//    }
+    @PostMapping("/login1")
+    public ResultVO<?> login(@RequestBody @Validated({Regist.class}) Knowledge knowledge) {
+        return new ResultVO<>(knowledge);
+//        BigDecimal cPrice = commodity.getCPrice();
+//        cPrice.setScale(2,BigDecimal.ROUND_DOWN);
+//        System.out.println(cPrice);
+//        return commodity;
+    }
 
 //public static void main(String[] args) {
 ////    System.out.println(System.currentTimeMillis());

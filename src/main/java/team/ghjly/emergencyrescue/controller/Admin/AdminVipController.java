@@ -10,6 +10,8 @@ import team.ghjly.emergencyrescue.vo.ResultCode;
 import team.ghjly.emergencyrescue.vo.ResultVO;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -17,6 +19,8 @@ import java.util.List;
 public class AdminVipController {
     @Resource
     private UserService userService;
+    @Resource
+    private AdminService adminService;
     @Resource
     private TeamService teamService;
     @Resource
@@ -27,6 +31,8 @@ public class AdminVipController {
     private EssayService essayService;
     @Resource
     private CommodityService commodityService;
+    @Resource
+    private KnowledgeService knowledgeService;
     private int pageSize = 5;
     private final ResultVO<?> success = new ResultVO<>();
     private final ResultVO<?> noData = new ResultVO<>(ResultCode.VALIDATE_FAILED, "当前页不存在数据！");
@@ -35,6 +41,10 @@ public class AdminVipController {
     private final ResultVO<?> teamNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "救援队不存在！");
     private final ResultVO<?> userNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "用户不存在！");
     private final ResultVO<?> essayNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "文章不存在！");
+    private final ResultVO<?> adminNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "管理员不存在！");
+    private final ResultVO<?> commodityNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "商品不存在！");
+    private final ResultVO<?> knowledgeNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "小知识不存在！");
+    private final ResultVO<?> commodityExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "商品已存在！");
 
     /**
      * 分页获取用户
@@ -137,12 +147,53 @@ public class AdminVipController {
         }
     }
 
-//    @PostMapping("/commodity")
-//    public ResultVO<?> addCommodity(@RequestBody @Validated({Regist.class}) Commodity commodity) {
-//        if (CommodityService.saveCommodity(commodity)) {
-//            return new ResultVO<>(commodity.getcId());
-//        } else {
-//            return saveFailed;
-//        }
-//    }
+    @GetMapping
+    public ResultVO<?> my(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Admin admin = (Admin) session.getAttribute("admin");
+        Admin dataAdmin = adminService.getAdminByAId(admin.getaId());
+        if (dataAdmin == null) {
+            return adminNotExist;
+        }
+        return new ResultVO<>(dataAdmin);
+    }
+
+    @PostMapping("/commodity")
+    public ResultVO<?> addCommodity(@RequestBody @Validated({Regist.class}) Commodity commodity) {
+        if (commodityService.checkCommodityByCName(commodity.getcName())) {
+            return commodityExist;
+        } else {
+            if (commodityService.saveCommodity(commodity)) {
+                return new ResultVO<>(commodity.getcId());
+            } else {
+                return saveFailed;
+            }
+        }
+    }
+
+    @DeleteMapping("/commodity/{cId}")
+    public ResultVO<?> deleteCommodity(@PathVariable Integer cId) {
+        if (commodityService.checkCommodityByCId(cId)) {
+            if (commodityService.removeCommodityByCId(cId)) {
+                return success;
+            } else {
+                return deleteFailed;
+            }
+        } else {
+            return commodityNotExist;
+        }
+    }
+
+    @DeleteMapping("/knowledge/{kId}")
+    public ResultVO<?> deleteKonwledge(@PathVariable Integer kId) {
+        if (knowledgeService.checkKonwledgeByKId(kId)) {
+            if (knowledgeService.removeKonwledgeByKId(kId)) {
+                return success;
+            } else {
+                return deleteFailed;
+            }
+        } else {
+            return knowledgeNotExist;
+        }
+    }
 }

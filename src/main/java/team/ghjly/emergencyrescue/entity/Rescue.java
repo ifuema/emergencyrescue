@@ -22,7 +22,7 @@ public class Rescue {
   @PositiveOrZero(message = "年龄格式不正确！", groups = {Regist.class})
   private Integer rAge;
   //救助人性别
-  @NotNull(message = "性别不能为空！", groups = {Regist.class})
+  @NotBlank(message = "性别不能为空！", groups = {Regist.class})
   @Pattern(regexp = "^[男女]$", message = "性别只能为男或女！", groups = {Regist.class})
   private String rGender;
   //救助人地址
@@ -45,7 +45,7 @@ public class Rescue {
   @Size(max = 255, message = "过敏史过长！", groups = {Regist.class})
   private String allergyHistory;
   //救援描述
-  @NotNull(message = "描述不能为空！", groups = {Regist.class})
+  @NotBlank(message = "描述不能为空！", groups = {Regist.class})
   private String rDescribe;
 
 

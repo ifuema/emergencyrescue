@@ -32,4 +32,23 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         }
         return dataKnowledgeList;
     }
+
+    @Override
+    public boolean checkKonwledgeByKId(Integer kId) {
+        Integer dataKId = knowledgeMapper.selectKIdByKId(kId);
+        if (dataKId == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean removeKonwledgeByKId(Integer kId) {
+        if (knowledgeMapper.deleteKnowledgeByKId(kId) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

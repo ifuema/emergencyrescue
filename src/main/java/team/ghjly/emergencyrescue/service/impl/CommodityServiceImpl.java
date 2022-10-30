@@ -45,4 +45,42 @@ public class CommodityServiceImpl implements CommodityService {
     public Integer getCIdByCName(String cName) {
         return commodityMapper.selectCIdByCName(cName);
     }
+
+    @Override
+    public boolean checkCommodityByCName(String cName) {
+        Integer dataCId = commodityMapper.selectCIdByCName(cName);
+        if (dataCId == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean saveCommodity(Commodity commodity) {
+        if (commodityMapper.insertCommodity(commodity) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean checkCommodityByCId(Integer cId) {
+        Integer dataCId = commodityMapper.selectCIdByCId(cId);
+        if (dataCId == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean removeCommodityByCId(Integer cId) {
+        if (commodityMapper.deleteCommodityByCId(cId) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -21,4 +21,7 @@ public interface AdminMapper {
      */
     @Select("SELECT a_id FROM admin WHERE a_account = #{aAccount} AND a_password = #{aPassword}")
     Integer selectAIdByAAccountAndAPassword(Admin admin);
+
+    @Select("SELECT a_id, a_account FROM admin WHERE a_id = #{aId}")
+    Admin selectAdminByAId(Integer aId);
 }

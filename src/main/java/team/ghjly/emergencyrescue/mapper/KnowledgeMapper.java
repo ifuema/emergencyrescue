@@ -1,6 +1,8 @@
 package team.ghjly.emergencyrescue.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import team.ghjly.emergencyrescue.entity.Knowledge;
 import team.ghjly.emergencyrescue.mapper.sql.EssayMapperSqlProvider;
@@ -19,4 +21,10 @@ public interface KnowledgeMapper {
      */
     @SelectProvider(type = KnowledgeMapperSqlProvider.class, method = "selectKnowledgeListPageByKnowledgeSql")
     List<Knowledge> selectKnowledgeListPageByKnowledge(int pageSize, Integer startIndex, Knowledge knowledge);
+
+    @Select("SELECT k_id FROM knowledge WHERE k_id = #{kId}")
+    Integer selectKIdByKId(Integer kId);
+
+    @Delete("DELETE FROM knowledge WHERE k_id = #{kId}")
+    Integer deleteKnowledgeByKId(Integer kId);
 }

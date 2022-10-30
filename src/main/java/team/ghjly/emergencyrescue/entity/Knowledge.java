@@ -1,5 +1,6 @@
 package team.ghjly.emergencyrescue.entity;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public class Knowledge {
@@ -10,6 +11,7 @@ public class Knowledge {
   //知识内容
   private String kBody;
   //关联商品列表
+  @Valid
   private List<Commodity> commodityList;
 
 

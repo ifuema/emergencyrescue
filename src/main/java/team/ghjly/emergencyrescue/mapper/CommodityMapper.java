@@ -35,4 +35,15 @@ public interface CommodityMapper {
      */
     @Select("SELECT c_id FROM commodity WHERE c_name = #{cName}")
     Integer selectCIdByCName(String cName);
+
+    @Insert("INSERT INTO commodity (c_img, c_price, c_name, c_introduce, c_url) " +
+            "VALUES (#{cImg}, #{cPrice}, #{cName}, #{cIntroduce}, #{cUrl})")
+    @Options(useGeneratedKeys = true, keyProperty = "cId", keyColumn = "c_id")
+    Integer insertCommodity(Commodity commodity);
+
+    @Select("SELECT c_id FROM commodity WHERE c_id = #{cId}")
+    Integer selectCIdByCId(Integer cId);
+
+    @Delete("DELETE FROM commodity WHERE c_id = #{cId}")
+    Integer deleteCommodityByCId(Integer cId);
 }

@@ -35,4 +35,14 @@ public class AdminServiceImpl implements AdminService {
         }
         return true;
     }
+
+    /**
+     * 根据id文本获取管理员信息
+     * @param getaId
+     * @return
+     */
+    @Override
+    public Admin getAdminByAId(Integer aId) {
+        return adminMapper.selectAdminByAId(aId);
+    }
 }

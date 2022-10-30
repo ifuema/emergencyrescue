@@ -1,20 +1,23 @@
 package team.ghjly.emergencyrescue.entity;
 
+import team.ghjly.emergencyrescue.entity.groups.Login;
 import team.ghjly.emergencyrescue.entity.groups.Regist;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class Commodity {
   //商品编号
+  @NotNull(message = "商品编号不能为空！", groups = {Login.class})
   private Integer cId;
   //商品图片
   @NotBlank(message = "图片不能为空！", groups = {Regist.class})
   private String cImg;
   //商品价格
   @NotBlank(message = "商品价格不能为空！", groups = {Regist.class})
-  @Pattern(regexp = "^[男女]$", message = "性别只能为男或女！", groups = {Regist.class})
+  @Pattern(regexp = "^[1-9](\\d){0,3}(\\.\\d{1,2})?$", message = "价格格式不正确！（范围：1.00-9999.99）", groups = {Regist.class})
   private String cPrice;
   //商品名称
   @NotBlank(message = "商品名不能为空！", groups = {Regist.class})

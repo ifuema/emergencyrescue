@@ -13,4 +13,8 @@ public interface KnowledgeService {
      * @return
      */
     List<Knowledge> getKnowledgeListPageByKnowledge(int pageSize, Integer pageNum, Knowledge knowledge);
+
+    boolean checkKonwledgeByKId(Integer kId);
+
+    boolean removeKonwledgeByKId(Integer kId);
 }
