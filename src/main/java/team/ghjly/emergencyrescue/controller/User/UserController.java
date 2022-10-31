@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import team.ghjly.emergencyrescue.vo.ResultCode;
 import team.ghjly.emergencyrescue.entity.User;
 import team.ghjly.emergencyrescue.entity.groups.Login;
-import team.ghjly.emergencyrescue.entity.groups.Regist;
+import team.ghjly.emergencyrescue.entity.groups.Register;
 import team.ghjly.emergencyrescue.service.UserService;
 import team.ghjly.emergencyrescue.vo.ResultVO;
 
@@ -21,7 +21,7 @@ public class UserController {
     private final ResultVO<?> success = new ResultVO<>();
     private final ResultVO<?> accountNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号不存在！");
     private final ResultVO<?> accountExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号已存在！");
-    private final ResultVO<?> registFailed = new ResultVO<>(ResultCode.FAILED, "注册失败！");
+    private final ResultVO<?> registerFailed = new ResultVO<>(ResultCode.FAILED, "注册失败！");
     private final ResultVO<?> accountOrPasswordError = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号或密码错误！");
 
     /**
@@ -56,7 +56,7 @@ public class UserController {
      * @return
      */
     @PostMapping
-    public ResultVO<?> regist(@RequestBody @Validated({Regist.class}) User user) {
+    public ResultVO<?> register(@RequestBody @Validated({Register.class}) User user) {
         if (userService.checkUserByUAccount(user.getuAccount())) {
             return accountExist;
         } else {
@@ -64,7 +64,7 @@ public class UserController {
             if (userService.saveUser(user)) {
                 return new ResultVO<>(user.getuId());
             } else {
-                return registFailed;
+                return registerFailed;
             }
         }
     }

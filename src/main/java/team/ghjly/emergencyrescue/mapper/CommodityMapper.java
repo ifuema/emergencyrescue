@@ -46,4 +46,7 @@ public interface CommodityMapper {
 
     @Delete("DELETE FROM commodity WHERE c_id = #{cId}")
     Integer deleteCommodityByCId(Integer cId);
+
+    @Select("SELECT * FROM commodity WHERE c_id = #{cId}")
+    Commodity selectCommodityByCId(Integer cId);
 }

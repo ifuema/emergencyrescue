@@ -12,7 +12,7 @@ import team.ghjly.emergencyrescue.service.OrderService;
 import team.ghjly.emergencyrescue.util.HttpRequestUtil;
 import team.ghjly.emergencyrescue.vo.ResultCode;
 import team.ghjly.emergencyrescue.entity.User;
-import team.ghjly.emergencyrescue.entity.groups.Regist;
+import team.ghjly.emergencyrescue.entity.groups.Register;
 import team.ghjly.emergencyrescue.service.RescueService;
 import team.ghjly.emergencyrescue.service.UserService;
 import team.ghjly.emergencyrescue.vo.ResultVO;
@@ -44,7 +44,7 @@ public class UserVipController {
     private String afdToken;
     private final ResultVO<?> userNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "用户不存在！");
     private final ResultVO<?> applyFailed = new ResultVO<>(ResultCode.FAILED, "申请失败！");
-    private final ResultVO<?> orderRegistFailed = new ResultVO<>(ResultCode.FAILED, "订单注册失败！请联系管理员！");
+    private final ResultVO<?> orderRegisterFailed = new ResultVO<>(ResultCode.FAILED, "订单注册失败！请联系管理员！");
     private final ResultVO<?> tradeNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "不存在该订单！请核对订单号！");
     private final ResultVO<?> commodityNotExist = new ResultVO<>(ResultCode.FAILED, "商品缺失！请联系管理员！");
     private final ResultVO<?> commodityFailed = new ResultVO<>(ResultCode.FAILED, "获取商品参数错误！请联系管理员！");
@@ -74,7 +74,7 @@ public class UserVipController {
      * @return
      */
     @PostMapping("/rescue")
-    public ResultVO<?> requestRescue(@RequestBody @Validated({Regist.class}) Rescue rescue, HttpServletRequest request) {
+    public ResultVO<?> requestRescue(@RequestBody @Validated({Register.class}) Rescue rescue, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         rescue.setuId(user.getuId());
@@ -118,7 +118,7 @@ public class UserVipController {
      * @return
      */
     @PostMapping("/order")
-    public ResultVO<?> buy(@RequestBody @Validated({Regist.class}) Order order, HttpServletRequest request) {
+    public ResultVO<?> buy(@RequestBody @Validated({Register.class}) Order order, HttpServletRequest request) {
         if (!orderService.checkOrderByOTrade(order.getoTrade())) {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
@@ -172,7 +172,7 @@ public class UserVipController {
                         if (orderService.saveOrder(dataOrder)) {
                             return new ResultVO<>(dataOrder.getoId());
                         } else {
-                            return orderRegistFailed;
+                            return orderRegisterFailed;
                         }
                     } else {
                         return tradeNotExist;

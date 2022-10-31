@@ -5,10 +5,6 @@ public class Team {
   private Integer tId;
   //救援队名称
   private String tName;
-  //救援队账号
-  private Integer tAccount;
-  //救援队密码
-  private String tPassword;
   //救援队人数
   private Integer tNum;
   //救援队简介
@@ -34,24 +30,6 @@ public class Team {
 
   public void settName(String tName) {
     this.tName = tName;
-  }
-
-
-  public Integer gettAccount() {
-    return tAccount;
-  }
-
-  public void settAccount(Integer tAccount) {
-    this.tAccount = tAccount;
-  }
-
-
-  public String gettPassword() {
-    return tPassword;
-  }
-
-  public void settPassword(String tPassword) {
-    this.tPassword = tPassword;
   }
 
 
@@ -96,8 +74,6 @@ public class Team {
     return "Team{" +
             "tId=" + tId +
             ", tName='" + tName + '\'' +
-            ", tAccount=" + tAccount +
-            ", tPassword='" + tPassword + '\'' +
             ", tNum=" + tNum +
             ", tIntroduce='" + tIntroduce + '\'' +
             ", tScope='" + tScope + '\'' +

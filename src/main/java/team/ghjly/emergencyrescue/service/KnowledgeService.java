@@ -17,4 +17,6 @@ public interface KnowledgeService {
     boolean checkKonwledgeByKId(Integer kId);
 
     boolean removeKonwledgeByKId(Integer kId);
+
+    boolean saveKnowledge(Knowledge knowledge);
 }

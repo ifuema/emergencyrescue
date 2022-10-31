@@ -35,4 +35,6 @@ public interface CommodityService {
     boolean checkCommodityByCId(Integer cId);
 
     boolean removeCommodityByCId(Integer cId);
+
+    Commodity getCommodityByCId(Integer cId);
 }

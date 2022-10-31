@@ -4,7 +4,7 @@ import org.apache.ibatis.jdbc.SQL;
 import team.ghjly.emergencyrescue.entity.Team;
 
 public class TeamMapperSqlProvider {
-    public static String selectTeamPublicListPageByTeamSql(final Team team) {
+    public static String selectTeamListPageByTeamSql(final Team team) {
         return new SQL() {{
             SELECT("t_id, t_name, t_num, t_introduce, t_scope, t_img").FROM("team");
             if (team.gettName() != null && team.gettName() != "") {

@@ -28,7 +28,7 @@ public class TeamController {
      */
     @GetMapping("/page/{pageNum}")
     public ResultVO<?> page(@PathVariable Integer pageNum, Team team) {
-        List<Team> dataTeamList = teamService.getTeamPublicListPageByTeam(pageSize, pageNum, team);
+        List<Team> dataTeamList = teamService.getTeamListPageByTeam(pageSize, pageNum, team);
         if (dataTeamList.isEmpty()) {
             return noData;
         } else {

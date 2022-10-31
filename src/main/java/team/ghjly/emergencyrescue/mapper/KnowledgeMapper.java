@@ -1,9 +1,6 @@
 package team.ghjly.emergencyrescue.mapper;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 import team.ghjly.emergencyrescue.entity.Knowledge;
 import team.ghjly.emergencyrescue.mapper.sql.EssayMapperSqlProvider;
 import team.ghjly.emergencyrescue.mapper.sql.KnowledgeMapperSqlProvider;
@@ -27,4 +24,8 @@ public interface KnowledgeMapper {
 
     @Delete("DELETE FROM knowledge WHERE k_id = #{kId}")
     Integer deleteKnowledgeByKId(Integer kId);
+
+    @Insert("INSERT INTO knowledge (k_title, k_body) VALUES (#{kTitle}, #{kBody})")
+    @Options(useGeneratedKeys = true, keyProperty = "kId", keyColumn = "k_id")
+    Integer insertKnowledge(Knowledge knowledge);
 }

@@ -83,4 +83,9 @@ public class CommodityServiceImpl implements CommodityService {
             return false;
         }
     }
+
+    @Override
+    public Commodity getCommodityByCId(Integer cId) {
+        return commodityMapper.selectCommodityByCId(cId);
+    }
 }

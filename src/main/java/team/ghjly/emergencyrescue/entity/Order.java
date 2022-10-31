@@ -1,6 +1,6 @@
 package team.ghjly.emergencyrescue.entity;
 
-import team.ghjly.emergencyrescue.entity.groups.Regist;
+import team.ghjly.emergencyrescue.entity.groups.Register;
 
 import javax.validation.constraints.NotBlank;
 import java.time.Instant;
@@ -27,7 +27,7 @@ public class Order {
   //订单总价
   private String oPrice;
   //订单号
-  @NotBlank(message = "订单号不能为空！", groups = {Regist.class})
+  @NotBlank(message = "订单号不能为空！", groups = {Register.class})
   private String oTrade;
   //备注
   private String oRemake;

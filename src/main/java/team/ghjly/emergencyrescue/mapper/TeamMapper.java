@@ -18,8 +18,8 @@ public interface TeamMapper {
      * @param team
      * @return
      */
-    @SelectProvider(type = TeamMapperSqlProvider.class, method = "selectTeamPublicListPageByTeamSql")
-    List<Team> selectTeamPublicListPageByTeam(int pageSize, Integer startIndex, Team team);
+    @SelectProvider(type = TeamMapperSqlProvider.class, method = "selectTeamListPageByTeamSql")
+    List<Team> selectTeamListPageByTeam(int pageSize, Integer startIndex, Team team);
 
     /**
      * 根据tid文本删除救援队

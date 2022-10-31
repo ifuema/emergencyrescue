@@ -21,9 +21,9 @@ public class TeamServiceImpl implements TeamService {
      * @return
      */
     @Override
-    public List<Team> getTeamPublicListPageByTeam(int pageSize, Integer pageNum, Team team) {
+    public List<Team> getTeamListPageByTeam(int pageSize, Integer pageNum, Team team) {
         Integer startIndex = (pageNum - 1) * pageSize;
-        return teamMapper.selectTeamPublicListPageByTeam(pageSize, startIndex, team);
+        return teamMapper.selectTeamListPageByTeam(pageSize, startIndex, team);
     }
 
     /**

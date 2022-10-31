@@ -1,10 +1,10 @@
 package team.ghjly.emergencyrescue.controller.Admin;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import team.ghjly.emergencyrescue.entity.*;
-import team.ghjly.emergencyrescue.entity.groups.Regist;
+import team.ghjly.emergencyrescue.entity.groups.AdvancedRegister;
+import team.ghjly.emergencyrescue.entity.groups.Register;
 import team.ghjly.emergencyrescue.service.*;
 import team.ghjly.emergencyrescue.vo.ResultCode;
 import team.ghjly.emergencyrescue.vo.ResultVO;
@@ -126,7 +126,7 @@ public class AdminVipController {
     }
 
     @PostMapping("/essay")
-    public ResultVO<?> addEssay(@RequestBody @Validated({Regist.class}) Essay essay) {
+    public ResultVO<?> addEssay(@RequestBody @Validated({Register.class}) Essay essay) {
         if (essayService.saveEssay(essay)) {
             return new ResultVO<>(essay.geteId());
         } else {
@@ -159,7 +159,7 @@ public class AdminVipController {
     }
 
     @PostMapping("/commodity")
-    public ResultVO<?> addCommodity(@RequestBody @Validated({Regist.class}) Commodity commodity) {
+    public ResultVO<?> addCommodity(@RequestBody @Validated({Register.class}) Commodity commodity) {
         if (commodityService.checkCommodityByCName(commodity.getcName())) {
             return commodityExist;
         } else {
@@ -194,6 +194,20 @@ public class AdminVipController {
             }
         } else {
             return knowledgeNotExist;
+        }
+    }
+
+    @PostMapping("/knowledge")
+    public ResultVO<?> addKnowledge(@RequestBody @Validated({AdvancedRegister.class}) Knowledge knowledge) {
+        for (Commodity commodity : knowledge.getCommodityList()) {
+            if (!commodityService.checkCommodityByCId(commodity.getcId())) {
+                return new ResultVO<>(ResultCode.VALIDATE_FAILED, "编号为 " + commodity.getcId() + " 的商品不存在！");
+            }
+        }
+        if (knowledgeService.saveKnowledge(knowledge)) {
+            return new ResultVO<>(knowledge.getkId());
+        } else {
+            return saveFailed;
         }
     }
 }

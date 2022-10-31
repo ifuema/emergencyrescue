@@ -12,7 +12,7 @@ public interface TeamService {
      * @param team
      * @return
      */
-    List<Team> getTeamPublicListPageByTeam(int pageSize, Integer pageNum, Team team);
+    List<Team> getTeamListPageByTeam(int pageSize, Integer pageNum, Team team);
 
     /**
      * 根据tid文本移除救援队
