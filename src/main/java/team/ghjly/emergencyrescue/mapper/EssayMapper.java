@@ -36,4 +36,8 @@ public interface EssayMapper {
 
     @Delete("DELETE FROM essay WHERE e_id = #{eId}")
     Integer deleteEssayByEId(Integer eId);
+
+    @Update("UPDATE essay SET e_title = #{eTitle}, e_img = #{eImg}, " +
+            "e_body = #{eBody}, e_type = #{eType} WHERE t_id = #{tId}")
+    Integer updateEssayByEId(Essay essay);
 }

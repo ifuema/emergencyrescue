@@ -63,4 +63,13 @@ public class EssayServiceImpl implements EssayService {
             return false;
         }
     }
+
+    @Override
+    public boolean modifyEssayByEId(Essay essay) {
+        if (essayMapper.updateEssayByEId(essay) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

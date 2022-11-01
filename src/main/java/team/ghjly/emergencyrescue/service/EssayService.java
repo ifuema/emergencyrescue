@@ -26,4 +26,6 @@ public interface EssayService {
     boolean checkEssayByEId(Integer eId);
 
     boolean removeEssayByEId(Integer eId);
+
+    boolean modifyEssayByEId(Essay essay);
 }

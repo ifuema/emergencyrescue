@@ -49,4 +49,8 @@ public interface CommodityMapper {
 
     @Select("SELECT * FROM commodity WHERE c_id = #{cId}")
     Commodity selectCommodityByCId(Integer cId);
+
+    @Update("UPDATE commodity SET c_name = #{cName}, c_url = #{cUrl}, c_introduce = #{cIntroduce}, " +
+            "c_price = #{cPrice}, c_img = #{cImg} WHERE c_id = #{cId}")
+    Integer updateCommodityByCId(Commodity commodity);
 }

@@ -1,9 +1,6 @@
 package team.ghjly.emergencyrescue.mapper;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 import team.ghjly.emergencyrescue.entity.Team;
 import team.ghjly.emergencyrescue.mapper.sql.TeamMapperSqlProvider;
 
@@ -31,4 +28,8 @@ public interface TeamMapper {
 
     @Select("SELECT t_id FROM team WHERE t_id = #{tId}")
     Integer selectTIdByTId(Integer tId);
+
+    @Update("UPDATE team SET t_name = #{tName}, t_num = #{tNum}, t_introduce = #{tIntroduce}, " +
+            "t_scope = #{tScope}, t_img = #{tImg} WHERE t_id = #{tId}")
+    Integer updateTeamByTId(Team team);
 }

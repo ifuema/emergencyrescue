@@ -1,10 +1,12 @@
 package team.ghjly.emergencyrescue.controller.User;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.DigestUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import team.ghjly.emergencyrescue.entity.Commodity;
 import team.ghjly.emergencyrescue.entity.Order;
 import team.ghjly.emergencyrescue.entity.Rescue;
 import team.ghjly.emergencyrescue.service.CommodityService;
@@ -42,6 +44,8 @@ public class UserVipController {
     private String afdUserId;
     @Value("${afd.token}")
     private String afdToken;
+    private final ResultVO<?> success = new ResultVO<>();
+    private final ResultVO<?> accountExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "账号已存在！");
     private final ResultVO<?> userNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "用户不存在！");
     private final ResultVO<?> applyFailed = new ResultVO<>(ResultCode.FAILED, "申请失败！");
     private final ResultVO<?> orderRegisterFailed = new ResultVO<>(ResultCode.FAILED, "订单注册失败！请联系管理员！");
@@ -50,6 +54,7 @@ public class UserVipController {
     private final ResultVO<?> commodityFailed = new ResultVO<>(ResultCode.FAILED, "获取商品参数错误！请联系管理员！");
     private final ResultVO<?> systemFailed = new ResultVO<>(ResultCode.FAILED, "系统错误！请联系管理员！");
     private final ResultVO<?> tradeExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "该订单号已被注册！请不要重复添加！");
+    private final ResultVO<?> saveFailed = new ResultVO<>(ResultCode.FAILED, "保存失败！");
 
     /**
      * 获取已登录用户信息
@@ -59,8 +64,8 @@ public class UserVipController {
     @GetMapping
     public ResultVO<?> my(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        User dataUser = userService.getUserByUId(user.getuId());
+        User sessionUser = (User) session.getAttribute("user");
+        User dataUser = userService.getUserByUId(sessionUser.getuId());
         if (dataUser == null) {
             return userNotExist;
         }
@@ -76,8 +81,8 @@ public class UserVipController {
     @PostMapping("/rescue")
     public ResultVO<?> requestRescue(@RequestBody @Validated({Register.class}) Rescue rescue, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        rescue.setuId(user.getuId());
+        User sessionUser = (User) session.getAttribute("user");
+        rescue.setuId(sessionUser.getuId());
         if (rescueService.saveRescue(rescue)) {
             return new ResultVO<>(rescue.getrId());
         } else {
@@ -93,8 +98,8 @@ public class UserVipController {
     @GetMapping("/rescue")
     public ResultVO<List<Rescue>> myRescue(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        List<Rescue> dataRescueList = rescueService.getRescueListByUId(user.getuId());
+        User sessionUser = (User) session.getAttribute("user");
+        List<Rescue> dataRescueList = rescueService.getRescueListByUId(sessionUser.getuId());
         return new ResultVO<>(dataRescueList);
     }
 
@@ -106,9 +111,27 @@ public class UserVipController {
     @GetMapping("/order")
     public ResultVO<List<Order>> myOrder(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        List<Order> dataOrderList = orderService.getOrderListByUId(user.getuId());
+        User sessionUser = (User) session.getAttribute("user");
+        List<Order> dataOrderList = orderService.getOrderListByUId(sessionUser.getuId());
         return new ResultVO<>(dataOrderList);
+    }
+
+    @PutMapping("/session")
+    public ResultVO<?> changeUser(@RequestBody @Validated({Register.class}) User user, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User sessionUser = (User) session.getAttribute("user");
+        if (userService.checkUserByUAccount(user.getuAccount())) {
+            return accountExist;
+        } else {
+            user.setuId(sessionUser.getuId());
+            user.setuPassword(BCrypt.hashpw(user.getuPassword(), BCrypt.gensalt()));
+            if (userService.modifyUserByUId(user)) {
+                session.setAttribute("user", user);
+                return success;
+            } else {
+                return saveFailed;
+            }
+        }
     }
 
     /**
@@ -121,7 +144,7 @@ public class UserVipController {
     public ResultVO<?> buy(@RequestBody @Validated({Register.class}) Order order, HttpServletRequest request) {
         if (!orderService.checkOrderByOTrade(order.getoTrade())) {
             HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
+            User sessionUser = (User) session.getAttribute("user");
             Order dataOrder = null;
             String url = "https://afdian.net/api/open/query-order";
             int page = 1;
@@ -147,7 +170,7 @@ public class UserVipController {
                                     if (dataCId != null) {
                                         dataOrder = new Order();
                                         dataOrder.setcId(dataCId);
-                                        dataOrder.setuId(user.getuId());
+                                        dataOrder.setuId(sessionUser.getuId());
                                         dataOrder.setoTrade(dataOrderJsonNode.path("out_trade_no").asText());
                                         dataOrder.setoNum(Integer.parseInt(dataDetailJsonNode.path("count").asText()));
                                         try {

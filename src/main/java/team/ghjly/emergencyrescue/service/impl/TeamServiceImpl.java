@@ -48,4 +48,13 @@ public class TeamServiceImpl implements TeamService {
         }
         return true;
     }
+
+    @Override
+    public boolean modifyTeamByTId(Team team) {
+        if (teamMapper.updateTeamByTId(team) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

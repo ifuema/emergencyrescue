@@ -4,6 +4,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import team.ghjly.emergencyrescue.entity.*;
 import team.ghjly.emergencyrescue.entity.groups.AdvancedRegister;
+import team.ghjly.emergencyrescue.entity.groups.Change;
 import team.ghjly.emergencyrescue.entity.groups.Register;
 import team.ghjly.emergencyrescue.service.*;
 import team.ghjly.emergencyrescue.vo.ResultCode;
@@ -12,6 +13,7 @@ import team.ghjly.emergencyrescue.vo.ResultVO;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -150,8 +152,8 @@ public class AdminVipController {
     @GetMapping
     public ResultVO<?> my(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Admin admin = (Admin) session.getAttribute("admin");
-        Admin dataAdmin = adminService.getAdminByAId(admin.getaId());
+        Admin sessionAdmin = (Admin) session.getAttribute("admin");
+        Admin dataAdmin = adminService.getAdminByAId(sessionAdmin.getaId());
         if (dataAdmin == null) {
             return adminNotExist;
         }
@@ -199,15 +201,70 @@ public class AdminVipController {
 
     @PostMapping("/knowledge")
     public ResultVO<?> addKnowledge(@RequestBody @Validated({AdvancedRegister.class}) Knowledge knowledge) {
-        for (Commodity commodity : knowledge.getCommodityList()) {
-            if (!commodityService.checkCommodityByCId(commodity.getcId())) {
-                return new ResultVO<>(ResultCode.VALIDATE_FAILED, "编号为 " + commodity.getcId() + " 的商品不存在！");
+        Iterator<Commodity> commodityIterator = knowledge.getCommodityList().iterator();
+        boolean state;
+        while (commodityIterator.hasNext()) {
+            state = true;
+            Commodity nextCommodity = commodityIterator.next();
+            for (Commodity commodity : knowledge.getCommodityList()) {
+                if (nextCommodity.getcId().equals(commodity.getcId())) {
+                    commodityIterator.remove();
+                    state = false;
+                    break;
+                }
+            }
+            if (state) {
+                if (!commodityService.checkCommodityByCId(nextCommodity.getcId())) {
+                    return new ResultVO<>(ResultCode.VALIDATE_FAILED, "编号为 " + nextCommodity.getcId() + " 的商品不存在！");
+                }
             }
         }
         if (knowledgeService.saveKnowledge(knowledge)) {
             return new ResultVO<>(knowledge.getkId());
         } else {
             return saveFailed;
+        }
+    }
+
+    @PutMapping("/team/{tId}")
+    public ResultVO<?> changeTeam(@RequestBody @Validated({Register.class}) Team team, @PathVariable Integer tId) {
+        if (teamService.checkTeamByTId(tId)) {
+            team.settId(tId);
+            if (teamService.modifyTeamByTId(team)) {
+                return success;
+            } else {
+                return saveFailed;
+            }
+        } else {
+            return teamNotExist;
+        }
+    }
+
+    @PutMapping("/commodity/{cId}")
+    public ResultVO<?> changeCommodity(@RequestBody @Validated({Register.class}) Commodity commodity, @PathVariable Integer cId) {
+        if (commodityService.checkCommodityByCId(cId)) {
+            commodity.setcId(cId);
+            if (commodityService.modifyCommodityByCId(commodity)) {
+                return success;
+            } else {
+                return saveFailed;
+            }
+        } else {
+            return commodityNotExist;
+        }
+    }
+
+    @PutMapping("/essay/{eId}")
+    public ResultVO<?> changeEssay(@RequestBody @Validated({Register.class}) Essay essay, @PathVariable Integer eId) {
+        if (essayService.checkEssayByEId(eId)) {
+            essay.seteId(eId);
+            if (essayService.modifyEssayByEId(essay)) {
+                return success;
+            } else {
+                return saveFailed;
+            }
+        } else {
+            return essayNotExist;
         }
     }
 }

@@ -108,4 +108,13 @@ public class UserServiceImpl implements UserService {
             return true;
         }
     }
+
+    @Override
+    public boolean modifyUserByUId(User user) {
+        if (userMapper.updateUserByUId(user) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -38,15 +38,15 @@ public class UserInterceptor implements HandlerInterceptor {
         }
         response.setContentType("application/json;charset=UTF-8");
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
+        User sessionUser = (User) session.getAttribute("user");
+        if (sessionUser == null) {
             try {
                 response.getWriter().write(notLoginJson);
             } catch (IOException e) {
             }
             return false;
         } else {
-            boolean result = userService.checkUserByUAccountAndUPassword(user);
+            boolean result = userService.checkUserByUAccountAndUPassword(sessionUser);
             if (!result) {
                 try {
                     response.getWriter().write(stateInvalidJson);

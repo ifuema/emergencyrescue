@@ -65,4 +65,8 @@ public interface UserMapper {
 
     @Select("SELECT u_id FROM user WHERE u_id = #{uId}")
     Integer selectUIdByUId(Integer uId);
+
+    @Update("UPDATE user SET u_name = #{uName}, u_account = #{uAccount}, u_password = #{uPassword}, " +
+            "u_telephone = #{uTelephone}, u_email = #{uEmail} WHERE u_id = #{uId}")
+    Integer updateUserByUId(User user);
 }

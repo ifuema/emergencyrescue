@@ -22,4 +22,6 @@ public interface TeamService {
     boolean removeTeamByTId(Integer tId);
 
     boolean checkTeamByTId(Integer tId);
+
+    boolean modifyTeamByTId(Team team);
 }

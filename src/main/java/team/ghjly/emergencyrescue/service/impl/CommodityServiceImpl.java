@@ -88,4 +88,13 @@ public class CommodityServiceImpl implements CommodityService {
     public Commodity getCommodityByCId(Integer cId) {
         return commodityMapper.selectCommodityByCId(cId);
     }
+
+    @Override
+    public boolean modifyCommodityByCId(Commodity commodity) {
+        if (commodityMapper.updateCommodityByCId(commodity) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

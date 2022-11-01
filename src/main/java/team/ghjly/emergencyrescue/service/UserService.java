@@ -52,4 +52,6 @@ public interface UserService {
     boolean removeUserByUId(Integer uId);
 
     boolean checkUserByUId(Integer uId);
+
+    boolean modifyUserByUId(User user);
 }
