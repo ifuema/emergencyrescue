@@ -120,17 +120,18 @@ public class UserVipController {
     public ResultVO<?> changeUser(@RequestBody @Validated({Register.class}) User user, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("user");
-        if (userService.checkUserByUAccount(user.getuAccount())) {
-            return accountExist;
-        } else {
-            user.setuId(sessionUser.getuId());
-            user.setuPassword(BCrypt.hashpw(user.getuPassword(), BCrypt.gensalt()));
-            if (userService.modifyUserByUId(user)) {
-                session.setAttribute("user", user);
-                return success;
-            } else {
-                return saveFailed;
+        if (!sessionUser.getuAccount().equals(user.getuAccount())){
+            if (userService.checkUserByUAccount(user.getuAccount())) {
+                return accountExist;
             }
+        }
+        user.setuId(sessionUser.getuId());
+        user.setuPassword(BCrypt.hashpw(user.getuPassword(), BCrypt.gensalt()));
+        if (userService.modifyUserByUId(user)) {
+            session.setAttribute("user", user);
+            return success;
+        } else {
+            return saveFailed;
         }
     }
 

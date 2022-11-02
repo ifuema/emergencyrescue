@@ -58,13 +58,8 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public boolean checkUserByUAccountAndUPassword(User user) {
-        Integer dataUId = userMapper.selectUIdByUAccountAndUPassword(user);
-        if (dataUId == null) {
-            return false;
-        } else {
-            return true;
-        }
+    public Integer getUIdByUAccountAndUPassword(User user) {
+        return userMapper.selectUIdByUAccountAndUPassword(user);
     }
 
     /**

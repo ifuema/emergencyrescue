@@ -38,22 +38,23 @@ public class AdminInterceptor implements HandlerInterceptor {
         }
         response.setContentType("application/json;charset=UTF-8");
         HttpSession session = request.getSession();
-        Admin admin = (Admin) session.getAttribute("admin");
-        if (admin == null) {
+        Admin sessionAdmin = (Admin) session.getAttribute("admin");
+        if (sessionAdmin == null) {
             try {
                 response.getWriter().write(notLoginJson);
             } catch (IOException e) {
             }
             return false;
         } else {
-            boolean result = adminService.checkUserByAAccountAndAPassword(admin);
-            if (!result) {
+            Integer dataAId = adminService.getAIdByAAccountAndAPassword(sessionAdmin);
+            if (dataAId == null) {
                 try {
                     response.getWriter().write(stateInvalidJson);
                 } catch (IOException e) {
                 }
                 return false;
             } else {
+                sessionAdmin.setaId(dataAId);
                 return true;
             }
         }

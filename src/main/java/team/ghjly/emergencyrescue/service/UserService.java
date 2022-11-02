@@ -31,7 +31,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    boolean checkUserByUAccountAndUPassword(User user);
+    Integer getUIdByUAccountAndUPassword(User user);
 
     /**
      * 根据id文本获取用户信息

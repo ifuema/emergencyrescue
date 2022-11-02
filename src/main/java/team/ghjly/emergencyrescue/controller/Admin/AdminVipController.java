@@ -46,6 +46,7 @@ public class AdminVipController {
     private final ResultVO<?> adminNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "管理员不存在！");
     private final ResultVO<?> commodityNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "商品不存在！");
     private final ResultVO<?> knowledgeNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "小知识不存在！");
+    private final ResultVO<?> rescueNotExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "救援不存在！");
     private final ResultVO<?> commodityExist = new ResultVO<>(ResultCode.VALIDATE_FAILED, "商品已存在！");
 
     /**
@@ -265,6 +266,20 @@ public class AdminVipController {
             }
         } else {
             return essayNotExist;
+        }
+    }
+
+    @PutMapping("/rescue/{rId}")
+    public ResultVO<?> changeRescue(@RequestBody @Validated({Register.class}) Rescue rescue, @PathVariable Integer rId) {
+        if (rescueService.checkRescueByRId(rId)) {
+            rescue.setrId(rId);
+            if (rescueService.modifyRescueByRId(rescue)) {
+                return success;
+            } else {
+                return saveFailed;
+            }
+        } else {
+            return rescueNotExist;
         }
     }
 }

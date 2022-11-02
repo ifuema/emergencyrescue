@@ -28,12 +28,8 @@ public class AdminServiceImpl implements AdminService {
      * @return
      */
     @Override
-    public boolean checkUserByAAccountAndAPassword(Admin admin) {
-        Integer dataUId = adminMapper.selectAIdByAAccountAndAPassword(admin);
-        if (dataUId == null) {
-            return false;
-        }
-        return true;
+    public Integer getAIdByAAccountAndAPassword(Admin admin) {
+        return adminMapper.selectAIdByAAccountAndAPassword(admin);
     }
 
     /**

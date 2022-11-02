@@ -46,14 +46,15 @@ public class UserInterceptor implements HandlerInterceptor {
             }
             return false;
         } else {
-            boolean result = userService.checkUserByUAccountAndUPassword(sessionUser);
-            if (!result) {
+            Integer dataUId = userService.getUIdByUAccountAndUPassword(sessionUser);
+            if (dataUId == null) {
                 try {
                     response.getWriter().write(stateInvalidJson);
                 } catch (IOException e) {
                 }
                 return false;
             } else {
+                sessionUser.setuId(dataUId);
                 return true;
             }
         }

@@ -15,7 +15,7 @@ public interface AdminService {
      * @param admin
      * @return
      */
-    boolean checkUserByAAccountAndAPassword(Admin admin);
+    Integer getAIdByAAccountAndAPassword(Admin admin);
 
     /**
      * 根据id文本获取管理员信息

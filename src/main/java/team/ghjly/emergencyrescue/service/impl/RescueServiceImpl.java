@@ -53,4 +53,22 @@ public class RescueServiceImpl implements RescueService {
         Integer startIndex = (pageNum - 1) * pageSize;
         return rescueMapper.selectRescueListPageByRescue(pageSize, startIndex, rescue);
     }
+
+    @Override
+    public boolean checkRescueByRId(Integer rId) {
+        Integer dataRId = rescueMapper.selectRIdByRId(rId);
+        if (dataRId == null) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean modifyRescueByRId(Rescue rescue) {
+        if (rescueMapper.updateRescueByRId(rescue) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

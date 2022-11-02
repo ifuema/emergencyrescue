@@ -38,6 +38,6 @@ public interface EssayMapper {
     Integer deleteEssayByEId(Integer eId);
 
     @Update("UPDATE essay SET e_title = #{eTitle}, e_img = #{eImg}, " +
-            "e_body = #{eBody}, e_type = #{eType} WHERE t_id = #{tId}")
+            "e_body = #{eBody}, e_type = #{eType} WHERE e_id = #{eId}")
     Integer updateEssayByEId(Essay essay);
 }

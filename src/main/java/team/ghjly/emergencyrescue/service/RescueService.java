@@ -27,4 +27,8 @@ public interface RescueService {
      * @return
      */
     List<Rescue> getRescueListPageByRescue(int pageSize, Integer pageNum, Rescue rescue);
+
+    boolean checkRescueByRId(Integer rId);
+
+    boolean modifyRescueByRId(Rescue rescue);
 }
