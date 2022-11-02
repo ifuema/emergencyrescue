@@ -42,7 +42,7 @@ public interface RescueMapper {
     Integer selectRIdByRId(Integer rId);
 
     @Update("UPDATE rescue SET r_name = #{rName}, r_age = #{rAge}, r_gender = #{rGender}, " +
-            "r_address = #{rAddress}, r_telephone = #{rTelephone}, r_state = #{rState}" +
+            "r_address = #{rAddress}, r_telephone = #{rTelephone}, r_state = #{rState} " +
             "past_medical_history = #{pastMedicalHistory}, allergy_history = #{allergyHistory}, " +
             "r_describe = #{rDescribe} WHERE r_id = #{rId}")
     Integer updateRescueByRId(Rescue rescue);
