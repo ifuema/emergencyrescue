@@ -38,6 +38,11 @@ public class CommodityController {
         }
     }
 
+    /**
+     * 获取商品
+     * @param cId
+     * @return
+     */
     @GetMapping("/{cId}")
     public ResultVO<?> getCommodity(@PathVariable Integer cId) {
         Commodity dataCommodity = commodityService.getCommodityByCId(cId);

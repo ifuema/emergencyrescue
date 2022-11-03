@@ -54,6 +54,11 @@ public class RescueServiceImpl implements RescueService {
         return rescueMapper.selectRescueListPageByRescue(pageSize, startIndex, rescue);
     }
 
+    /**
+     * 根据id文本判断是否已存在救援申请
+     * @param rId
+     * @return
+     */
     @Override
     public boolean checkRescueByRId(Integer rId) {
         Integer dataRId = rescueMapper.selectRIdByRId(rId);
@@ -63,6 +68,11 @@ public class RescueServiceImpl implements RescueService {
         return true;
     }
 
+    /**
+     * 根据id修改救援申请
+     * @param rescue
+     * @return
+     */
     @Override
     public boolean modifyRescueByRId(Rescue rescue) {
         if (rescueMapper.updateRescueByRId(rescue) >= 1) {

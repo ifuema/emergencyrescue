@@ -36,21 +36,54 @@ public interface CommodityMapper {
     @Select("SELECT c_id FROM commodity WHERE c_name = #{cName}")
     Integer selectCIdByCName(String cName);
 
+    /**
+     * 插入一条商品信息
+     * @param commodity
+     * @return
+     */
     @Insert("INSERT INTO commodity (c_img, c_price, c_name, c_introduce, c_url) " +
             "VALUES (#{cImg}, #{cPrice}, #{cName}, #{cIntroduce}, #{cUrl})")
     @Options(useGeneratedKeys = true, keyProperty = "cId", keyColumn = "c_id")
     Integer insertCommodity(Commodity commodity);
 
+    /**
+     * 根据id文本查询商品id
+     * @param cId
+     * @return
+     */
     @Select("SELECT c_id FROM commodity WHERE c_id = #{cId}")
     Integer selectCIdByCId(Integer cId);
 
+    /**
+     * 根据id文本删除商品
+     * @param cId
+     * @return
+     */
     @Delete("DELETE FROM commodity WHERE c_id = #{cId}")
     Integer deleteCommodityByCId(Integer cId);
 
+    /**
+     * 根据id文本查询商品信息
+     * @param cId
+     * @return
+     */
     @Select("SELECT * FROM commodity WHERE c_id = #{cId}")
     Commodity selectCommodityByCId(Integer cId);
 
+    /**
+     * 根据id文本修改订单
+     * @param commodity
+     * @return
+     */
     @Update("UPDATE commodity SET c_name = #{cName}, c_url = #{cUrl}, c_introduce = #{cIntroduce}, " +
             "c_price = #{cPrice}, c_img = #{cImg} WHERE c_id = #{cId}")
     Integer updateCommodityByCId(Commodity commodity);
+
+    /**
+     * 根据id文本查询商品名称
+     * @param cId
+     * @return
+     */
+    @Select("SELECT c_name FROM commodity WHERE c_id = #{cId}")
+    String selectCNameByCId(Integer cId);
 }

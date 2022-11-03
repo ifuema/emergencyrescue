@@ -36,6 +36,11 @@ public class EssayServiceImpl implements EssayService {
         return essayMapper.selectEssayByEId(eId);
     }
 
+    /**
+     * 新增文章
+     * @param essay
+     * @return
+     */
     @Override
     public boolean saveEssay(Essay essay) {
         if (essayMapper.insertEssay(essay) >= 1) {
@@ -45,6 +50,11 @@ public class EssayServiceImpl implements EssayService {
         }
     }
 
+    /**
+     * 根据id文本判断是否已存在文章
+     * @param eId
+     * @return
+     */
     @Override
     public boolean checkEssayByEId(Integer eId) {
         Integer dataEId = essayMapper.selectEIdByEId(eId);
@@ -55,6 +65,11 @@ public class EssayServiceImpl implements EssayService {
         }
     }
 
+    /**
+     * 根据id文本删除文章
+     * @param eId
+     * @return
+     */
     @Override
     public boolean removeEssayByEId(Integer eId) {
         if (essayMapper.deleteEssayByEId(eId) >= 1) {
@@ -64,6 +79,11 @@ public class EssayServiceImpl implements EssayService {
         }
     }
 
+    /**
+     * 根据id修改文章
+     * @param essay
+     * @return
+     */
     @Override
     public boolean modifyEssayByEId(Essay essay) {
         if (essayMapper.updateEssayByEId(essay) >= 1) {

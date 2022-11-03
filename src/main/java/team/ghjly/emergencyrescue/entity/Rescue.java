@@ -1,5 +1,6 @@
 package team.ghjly.emergencyrescue.entity;
 
+import team.ghjly.emergencyrescue.entity.groups.Change;
 import team.ghjly.emergencyrescue.entity.groups.Register;
 
 import javax.validation.constraints.*;
@@ -34,6 +35,7 @@ public class Rescue {
   @DecimalMax(value = "99999999999", message = "电话号码过长！", groups = {Register.class})
   private Long rTelephone;
   //救助状态
+  @NotBlank(message = "救援状态不能为空！", groups = {Change.class})
   private String rState;
   //申请救援时间
   private Instant rTime;

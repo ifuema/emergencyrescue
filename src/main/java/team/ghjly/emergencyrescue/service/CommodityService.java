@@ -28,15 +28,52 @@ public interface CommodityService {
      */
     Integer getCIdByCName(String cName);
 
+    /**
+     * 根据商品名文本判断是否已存在商品
+     * @param cName
+     * @return
+     */
     boolean checkCommodityByCName(String cName);
 
+    /**
+     * 新增商品
+     * @param commodity
+     * @return
+     */
     boolean saveCommodity(Commodity commodity);
 
+    /**
+     * 根据id文本判断是否已存在商品
+     * @param cId
+     * @return
+     */
     boolean checkCommodityByCId(Integer cId);
 
+    /**
+     * 根据id文本删除商品
+     * @param cId
+     * @return
+     */
     boolean removeCommodityByCId(Integer cId);
 
+    /**
+     * 根据id文本获取商品信息
+     * @param cId
+     * @return
+     */
     Commodity getCommodityByCId(Integer cId);
 
+    /**
+     * 根据id修改商品
+     * @param commodity
+     * @return
+     */
     boolean modifyCommodityByCId(Commodity commodity);
+
+    /**
+     * 根据id文本获取商品名
+     * @param cId
+     * @return
+     */
+    String getCNameByCId(Integer cId);
 }

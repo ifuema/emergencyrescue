@@ -27,7 +27,7 @@ public interface UserService {
     User getUserPrivateByUAccount(Integer uAccount);
 
     /**
-     * 根据账号密码判断是否已存在用户
+     * 根据账号密码获取用户id
      * @param user
      * @return
      */
@@ -49,9 +49,24 @@ public interface UserService {
      */
     List<User> getUserListPageByUser(int pageSize, Integer pageNum, User user);
 
+    /**
+     * 根据id删除用户
+     * @param uId
+     * @return
+     */
     boolean removeUserByUId(Integer uId);
 
+    /**
+     * 根据id文本判断是否已存在用户
+     * @param uId
+     * @return
+     */
     boolean checkUserByUId(Integer uId);
 
+    /**
+     * 根据id修改用户
+     * @param user
+     * @return
+     */
     boolean modifyUserByUId(User user);
 }

@@ -28,7 +28,17 @@ public interface RescueService {
      */
     List<Rescue> getRescueListPageByRescue(int pageSize, Integer pageNum, Rescue rescue);
 
+    /**
+     * 根据id文本判断是否已存在救援申请
+     * @param rId
+     * @return
+     */
     boolean checkRescueByRId(Integer rId);
 
+    /**
+     * 根据id修改救援申请
+     * @param rescue
+     * @return
+     */
     boolean modifyRescueByRId(Rescue rescue);
 }

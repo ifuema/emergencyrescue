@@ -38,12 +38,22 @@ public interface RescueMapper {
     @SelectProvider(type = RescueMapperSqlProvider.class, method = "selectRescueListPageByRescueSql")
     List<Rescue> selectRescueListPageByRescue(int pageSize, Integer startIndex, Rescue rescue);
 
+    /**
+     * 根据id文本查询救援id
+     * @param rId
+     * @return
+     */
     @Select("SELECT r_id FROM rescue WHERE r_id = #{rId}")
     Integer selectRIdByRId(Integer rId);
 
+    /**
+     * 根据id文本修改救援信息
+     * @param rescue
+     * @return
+     */
     @Update("UPDATE rescue SET r_name = #{rName}, r_age = #{rAge}, r_gender = #{rGender}, " +
             "r_address = #{rAddress}, r_telephone = #{rTelephone}, r_state = #{rState}, " +
             "past_medical_history = #{pastMedicalHistory}, allergy_history = #{allergyHistory}, " +
-            "r_describe = #{rDescribe} WHERE r_id = #{rId}")
+            "r_describe = #{rDescribe}, t_id = #{tId} WHERE r_id = #{rId}")
     Integer updateRescueByRId(Rescue rescue);
 }

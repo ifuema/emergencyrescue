@@ -11,6 +11,7 @@ import team.ghjly.emergencyrescue.service.KnowledgeCommodityService;
 import team.ghjly.emergencyrescue.service.KnowledgeService;
 
 import javax.annotation.Resource;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -39,6 +40,11 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         return dataKnowledgeList;
     }
 
+    /**
+     * 根据id文本判断是否已存在小知识
+     * @param kId
+     * @return
+     */
     @Override
     public boolean checkKonwledgeByKId(Integer kId) {
         Integer dataKId = knowledgeMapper.selectKIdByKId(kId);
@@ -49,6 +55,11 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         }
     }
 
+    /**
+     * 根据id删除小知识
+     * @param kId
+     * @return
+     */
     @Override
     public boolean removeKonwledgeByKId(Integer kId) {
         if (knowledgeMapper.deleteKnowledgeByKId(kId) >= 1) {
@@ -58,6 +69,11 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         }
     }
 
+    /**
+     * 新增小知识
+     * @param knowledge
+     * @return
+     */
     @Override
     @Transactional
     public boolean saveKnowledge(Knowledge knowledge) {
@@ -70,6 +86,50 @@ public class KnowledgeServiceImpl implements KnowledgeService {
                     if (!knowledgeCommodityService.saveKnowledgeCommodity(knowledgeCommodity)) {
                         return false;
                     }
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 根据id修改小知识
+     * @param knowledge
+     * @return
+     */
+    @Override
+    @Transactional
+    public boolean modifyKnowledgeByKId(Knowledge knowledge) {
+        if (knowledgeMapper.updateKnowledgeByKId(knowledge) >= 1) {
+            List<KnowledgeCommodity> dataKnowledgeCommodityList = knowledgeCommodityService.getKnowledgeCommodityListByKId(knowledge.getkId());
+            if (!knowledge.getCommodityList().isEmpty()) {
+                KnowledgeCommodity knowledgeCommodity = new KnowledgeCommodity();
+                knowledgeCommodity.setkId(knowledge.getkId());
+                boolean state;
+                for (Commodity commodity : knowledge.getCommodityList()) {
+                    state = false;
+                    Iterator<KnowledgeCommodity> dataKnowledgeCommodityiterator = dataKnowledgeCommodityList.iterator();
+                    while (dataKnowledgeCommodityiterator.hasNext()) {
+                        KnowledgeCommodity dataKnowledgeCommodity = dataKnowledgeCommodityiterator.next();
+                        if (commodity.getcId().equals(dataKnowledgeCommodity.getcId())) {
+                            dataKnowledgeCommodityiterator.remove();
+                            state = true;
+                            break;
+                        }
+                    }
+                    if (!state) {
+                        knowledgeCommodity.setcId(commodity.getcId());
+                        if (!knowledgeCommodityService.saveKnowledgeCommodity(knowledgeCommodity)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            for (KnowledgeCommodity dataKnowledgeCommodity : dataKnowledgeCommodityList) {
+                if (!knowledgeCommodityService.removeKnowledgeCommodityByCIdAndKId(dataKnowledgeCommodity)) {
+                    return false;
                 }
             }
             return true;

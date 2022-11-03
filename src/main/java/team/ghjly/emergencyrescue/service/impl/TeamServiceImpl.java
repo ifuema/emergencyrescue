@@ -40,6 +40,11 @@ public class TeamServiceImpl implements TeamService {
         }
     }
 
+    /**
+     * 根据id文本判断是否已存在救援队
+     * @param tId
+     * @return
+     */
     @Override
     public boolean checkTeamByTId(Integer tId) {
         Integer dataTId = teamMapper.selectTIdByTId(tId);
@@ -49,6 +54,11 @@ public class TeamServiceImpl implements TeamService {
         return true;
     }
 
+    /**
+     * 根据id修改救援队
+     * @param team
+     * @return
+     */
     @Override
     public boolean modifyTeamByTId(Team team) {
         if (teamMapper.updateTeamByTId(team) >= 1) {

@@ -46,6 +46,11 @@ public class CommodityServiceImpl implements CommodityService {
         return commodityMapper.selectCIdByCName(cName);
     }
 
+    /**
+     * 根据商品名文本判断是否已存在商品
+     * @param cName
+     * @return
+     */
     @Override
     public boolean checkCommodityByCName(String cName) {
         Integer dataCId = commodityMapper.selectCIdByCName(cName);
@@ -56,6 +61,11 @@ public class CommodityServiceImpl implements CommodityService {
         }
     }
 
+    /**
+     * 新增商品
+     * @param commodity
+     * @return
+     */
     @Override
     public boolean saveCommodity(Commodity commodity) {
         if (commodityMapper.insertCommodity(commodity) >= 1) {
@@ -65,6 +75,11 @@ public class CommodityServiceImpl implements CommodityService {
         }
     }
 
+    /**
+     * 根据id文本判断是否已存在商品
+     * @param cId
+     * @return
+     */
     @Override
     public boolean checkCommodityByCId(Integer cId) {
         Integer dataCId = commodityMapper.selectCIdByCId(cId);
@@ -75,6 +90,11 @@ public class CommodityServiceImpl implements CommodityService {
         }
     }
 
+    /**
+     * 根据id文本删除商品
+     * @param cId
+     * @return
+     */
     @Override
     public boolean removeCommodityByCId(Integer cId) {
         if (commodityMapper.deleteCommodityByCId(cId) >= 1) {
@@ -84,11 +104,21 @@ public class CommodityServiceImpl implements CommodityService {
         }
     }
 
+    /**
+     * 根据id文本获取商品信息
+     * @param cId
+     * @return
+     */
     @Override
     public Commodity getCommodityByCId(Integer cId) {
         return commodityMapper.selectCommodityByCId(cId);
     }
 
+    /**
+     * 根据id修改商品
+     * @param commodity
+     * @return
+     */
     @Override
     public boolean modifyCommodityByCId(Commodity commodity) {
         if (commodityMapper.updateCommodityByCId(commodity) >= 1) {
@@ -96,5 +126,15 @@ public class CommodityServiceImpl implements CommodityService {
         } else {
             return false;
         }
+    }
+
+    /**
+     * 根据id文本获取商品名
+     * @param cId
+     * @return
+     */
+    @Override
+    public String getCNameByCId(Integer cId) {
+        return commodityMapper.selectCNameByCId(cId);
     }
 }

@@ -1,7 +1,9 @@
 package team.ghjly.emergencyrescue.entity;
 
 public class KnowledgeCommodity {
+  //小知识id
   private Integer kId;
+  //商品id
   private Integer cId;
 
 

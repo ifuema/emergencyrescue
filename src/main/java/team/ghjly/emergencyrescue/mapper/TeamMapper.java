@@ -26,9 +26,19 @@ public interface TeamMapper {
     @Delete("DELETE FROM team WHERE t_id = #{tId}")
     Integer deleteTeamByTId(Integer tId);
 
+    /**
+     * 根据id文本查询救援队id
+     * @param tId
+     * @return
+     */
     @Select("SELECT t_id FROM team WHERE t_id = #{tId}")
     Integer selectTIdByTId(Integer tId);
 
+    /**
+     * 根据id文本修改救援队
+     * @param team
+     * @return
+     */
     @Update("UPDATE team SET t_name = #{tName}, t_num = #{tNum}, t_introduce = #{tIntroduce}, " +
             "t_scope = #{tScope}, t_img = #{tImg} WHERE t_id = #{tId}")
     Integer updateTeamByTId(Team team);

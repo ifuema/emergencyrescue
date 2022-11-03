@@ -21,7 +21,17 @@ public interface TeamService {
      */
     boolean removeTeamByTId(Integer tId);
 
+    /**
+     * 根据id文本判断是否已存在救援队
+     * @param tId
+     * @return
+     */
     boolean checkTeamByTId(Integer tId);
 
+    /**
+     * 根据id修改救援队
+     * @param team
+     * @return
+     */
     boolean modifyTeamByTId(Team team);
 }

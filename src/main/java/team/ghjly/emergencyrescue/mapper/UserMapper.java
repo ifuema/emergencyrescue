@@ -60,12 +60,27 @@ public interface UserMapper {
     @SelectProvider(type = UserMapperSqlProvider.class, method = "selectUserListPageByUserSql")
     List<User> selectUserListPageByUser(int pageSize, Integer startIndex, User user);
 
+    /**
+     * 根据id文本删除用户
+     * @param uId
+     * @return
+     */
     @Delete("DELETE FROM user WHERE u_id = #{uId}")
     Integer deleteUserByUId(Integer uId);
 
+    /**
+     * 根据id文本查询用户id
+     * @param uId
+     * @return
+     */
     @Select("SELECT u_id FROM user WHERE u_id = #{uId}")
     Integer selectUIdByUId(Integer uId);
 
+    /**
+     * 根据id文本修改用户
+     * @param user
+     * @return
+     */
     @Update("UPDATE user SET u_name = #{uName}, u_account = #{uAccount}, u_password = #{uPassword}, " +
             "u_telephone = #{uTelephone}, u_email = #{uEmail} WHERE u_id = #{uId}")
     Integer updateUserByUId(User user);

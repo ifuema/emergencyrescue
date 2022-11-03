@@ -116,6 +116,12 @@ public class UserVipController {
         return new ResultVO<>(dataOrderList);
     }
 
+    /**
+     * 修改已登录用户信息
+     * @param user
+     * @param request
+     * @return
+     */
     @PutMapping("/session")
     public ResultVO<?> changeUser(@RequestBody @Validated({Register.class}) User user, HttpServletRequest request) {
         HttpSession session = request.getSession();

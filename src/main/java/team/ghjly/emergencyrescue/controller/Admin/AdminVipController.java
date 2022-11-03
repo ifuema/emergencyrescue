@@ -203,18 +203,24 @@ public class AdminVipController {
     @PostMapping("/knowledge")
     public ResultVO<?> addKnowledge(@RequestBody @Validated({AdvancedRegister.class}) Knowledge knowledge) {
         Iterator<Commodity> commodityIterator = knowledge.getCommodityList().iterator();
-        boolean state;
+        boolean removeState;
+        boolean judgeState;
         while (commodityIterator.hasNext()) {
-            state = true;
+            removeState = false;
+            judgeState = false;
             Commodity nextCommodity = commodityIterator.next();
             for (Commodity commodity : knowledge.getCommodityList()) {
                 if (nextCommodity.getcId().equals(commodity.getcId())) {
-                    commodityIterator.remove();
-                    state = false;
-                    break;
+                    if (judgeState) {
+                        commodityIterator.remove();
+                        removeState = true;
+                        break;
+                    } else {
+                        judgeState = true;
+                    }
                 }
             }
-            if (state) {
+            if (!removeState) {
                 if (!commodityService.checkCommodityByCId(nextCommodity.getcId())) {
                     return new ResultVO<>(ResultCode.VALIDATE_FAILED, "编号为 " + nextCommodity.getcId() + " 的商品不存在！");
                 }
@@ -243,7 +249,13 @@ public class AdminVipController {
 
     @PutMapping("/commodity/{cId}")
     public ResultVO<?> changeCommodity(@RequestBody @Validated({Register.class}) Commodity commodity, @PathVariable Integer cId) {
-        if (commodityService.checkCommodityByCId(cId)) {
+        String dataCName = commodityService.getCNameByCId(cId);
+        if (dataCName == null) {
+            if (!dataCName.equals(commodity.getcName())) {
+                if (commodityService.checkCommodityByCName(commodity.getcName())) {
+                    return commodityExist;
+                }
+            }
             commodity.setcId(cId);
             if (commodityService.modifyCommodityByCId(commodity)) {
                 return success;
@@ -270,8 +282,13 @@ public class AdminVipController {
     }
 
     @PutMapping("/rescue/{rId}")
-    public ResultVO<?> changeRescue(@RequestBody @Validated({Register.class}) Rescue rescue, @PathVariable Integer rId) {
+    public ResultVO<?> changeRescue(@RequestBody @Validated({Register.class, Change.class}) Rescue rescue, @PathVariable Integer rId) {
         if (rescueService.checkRescueByRId(rId)) {
+            if (rescue.gettId() != null) {
+                if (!teamService.checkTeamByTId(rescue.gettId())) {
+                    return teamNotExist;
+                }
+            }
             rescue.setrId(rId);
             if (rescueService.modifyRescueByRId(rescue)) {
                 return success;
@@ -280,6 +297,44 @@ public class AdminVipController {
             }
         } else {
             return rescueNotExist;
+        }
+    }
+
+    @PutMapping("/knowledge/{kId}")
+    public ResultVO<?> addKnowledge(@RequestBody @Validated({AdvancedRegister.class}) Knowledge knowledge, @PathVariable Integer kId) {
+        if (knowledgeService.checkKonwledgeByKId(kId)) {
+            Iterator<Commodity> commodityIterator = knowledge.getCommodityList().iterator();
+            boolean removeState;
+            boolean judgeState;
+            while (commodityIterator.hasNext()) {
+                removeState = false;
+                judgeState = false;
+                Commodity nextCommodity = commodityIterator.next();
+                for (Commodity commodity : knowledge.getCommodityList()) {
+                    if (nextCommodity.getcId().equals(commodity.getcId())) {
+                        if (judgeState) {
+                            commodityIterator.remove();
+                            removeState = true;
+                            break;
+                        } else {
+                            judgeState = true;
+                        }
+                    }
+                }
+                if (!removeState) {
+                    if (!commodityService.checkCommodityByCId(nextCommodity.getcId())) {
+                        return new ResultVO<>(ResultCode.VALIDATE_FAILED, "编号为 " + nextCommodity.getcId() + " 的商品不存在！");
+                    }
+                }
+            }
+            knowledge.setkId(kId);
+            if (knowledgeService.modifyKnowledgeByKId(knowledge)) {
+                return success;
+            } else {
+                return saveFailed;
+            }
+        } else {
+            return knowledgeNotExist;
         }
     }
 }

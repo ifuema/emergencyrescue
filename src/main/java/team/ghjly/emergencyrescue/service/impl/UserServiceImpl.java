@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 根据账号密码判断是否已存在用户
+     * 根据账号密码获取用户id
      * @param user
      * @return
      */
@@ -85,6 +85,11 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectUserListPageByUser(pageSize, startIndex, user);
     }
 
+    /**
+     * 根据id删除用户
+     * @param uId
+     * @return
+     */
     @Override
     public boolean removeUserByUId(Integer uId) {
         if (userMapper.deleteUserByUId(uId) >= 1) {
@@ -94,6 +99,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * 根据id文本判断是否已存在用户
+     * @param uId
+     * @return
+     */
     @Override
     public boolean checkUserByUId(Integer uId) {
         Integer dataTId = userMapper.selectUIdByUId(uId);
@@ -104,6 +114,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * 根据id修改用户
+     * @param user
+     * @return
+     */
     @Override
     public boolean modifyUserByUId(User user) {
         if (userMapper.updateUserByUId(user) >= 1) {
