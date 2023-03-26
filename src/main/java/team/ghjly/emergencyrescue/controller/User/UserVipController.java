@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.DigestUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import team.ghjly.emergencyrescue.entity.Commodity;
 import team.ghjly.emergencyrescue.entity.Order;
 import team.ghjly.emergencyrescue.entity.Rescue;
 import team.ghjly.emergencyrescue.service.CommodityService;
